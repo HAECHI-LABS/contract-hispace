@@ -1,0 +1,17 @@
+{
+  "manifestVersion": "2.2",
+  "contracts": {},
+  "dependencies": {},
+  "name": "contract-hispace",
+  "version": "1.0.0",
+  "telemetryOptIn": true,
+  "compiler": {
+    "manager": "truffle",
+    "compilerSettings": {
+      "optimizer": {
+        "enabled": false,
+        "runs": "200"
+      }
+    }
+  }
+}
