@@ -14,14 +14,14 @@ Smart-contracts for Hiblocks platform
 
 ## Openzeppelin's Upgradable Contracts Deployment
 1. Once you have installed node, you can install the OpenZeppelin SDK CLI:
-`npm install --global @openzeppelin/cli`
+    - `npm install --global @openzeppelin/cli`
 2. Let’s now use the CLI to initialize a OpenZeppelin SDK project:
-`openzeppelin init` or `oz init`
+    - `openzeppelin init` or `oz init`
 3. We can now deploy our contract there, running openzeppelin create, and choosing to deploy the Counter contract to the development network.
-`oz create`
+    - `oz create`
 4. We can test it out by interacting with it from the terminal. Let’s try incrementing the counter, by sending a transaction to call the increase function through openzeppelin send-tx.
-`openzeppelin send-tx`
-5. See Openzeppelin SDK Quickstart guide : [https://docs.openzeppelin.com/sdk/2.6/first]
+    - `openzeppelin send-tx`
+5. See Openzeppelin SDK Quickstart guide : https://docs.openzeppelin.com/sdk/2.6/first
 
 
 ## Test
@@ -29,9 +29,6 @@ Smart-contracts for Hiblocks platform
 `truffle test`
 * In order to run only specific test file
 
-visit homepage : [https://hiblocks.io]
-try the hiblocks : [https://hispace.hiblocks.io]
+visit homepage : https://hiblocks.io
 
-[https://docs.openzeppelin.com/sdk/2.6/first] : https://docs.openzeppelin.com/sdk/2.6/first
-[https://hiblocks.io]: https://hiblocks.io
-[https://hispace.hiblocks.io]: https://hispace.hiblocks.io
+try the hiblocks : https://hispace.hiblocks.io
