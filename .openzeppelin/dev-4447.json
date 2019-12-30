@@ -1,0 +1,111 @@
+{
+  "contracts": {
+    "HispaceActivity": {
+      "address": "0x6bA8a909Daee8148089B799debd3e263a1731DdA",
+      "constructorCode": "608060405234801561001057600080fd5b506109c1806100206000396000f3fe",
+      "bodyBytecodeHash": "ba9ae8ca1fc4d68c49ed4104cecaa9720aedf727fef0047f1a806318a5fbcaa8",
+      "localBytecodeHash": "f331066c5bdbf31ea0d96a8dcb6022770ad0ed47e01387aa6ca5f44c39d49ee6",
+      "deployedBytecodeHash": "f331066c5bdbf31ea0d96a8dcb6022770ad0ed47e01387aa6ca5f44c39d49ee6",
+      "types": {
+        "t_struct<HispaceActivity.UserActivity>": {
+          "id": "t_struct<HispaceActivity.UserActivity>",
+          "kind": "struct",
+          "label": "HispaceActivity.UserActivity",
+          "members": [
+            {
+              "label": "activityType",
+              "astId": 376,
+              "type": "t_bytes32",
+              "src": "86:20:1"
+            },
+            {
+              "label": "targetAddress",
+              "astId": 378,
+              "type": "t_address",
+              "src": "113:21:1"
+            },
+            {
+              "label": "desc",
+              "astId": 380,
+              "type": "t_bytes",
+              "src": "141:10:1"
+            },
+            {
+              "label": "datetime",
+              "astId": 382,
+              "type": "t_uint256",
+              "src": "158:16:1"
+            }
+          ]
+        },
+        "t_bytes32": {
+          "id": "t_bytes32",
+          "kind": "elementary",
+          "label": "bytes32"
+        },
+        "t_address": {
+          "id": "t_address",
+          "kind": "elementary",
+          "label": "address"
+        },
+        "t_bytes": {
+          "id": "t_bytes",
+          "kind": "elementary",
+          "label": "bytes"
+        },
+        "t_uint256": {
+          "id": "t_uint256",
+          "kind": "elementary",
+          "label": "uint256"
+        },
+        "t_array:dyn<t_struct<HispaceActivity.UserActivity>>": {
+          "id": "t_array:dyn<t_struct<HispaceActivity.UserActivity>>",
+          "valueType": "t_struct<HispaceActivity.UserActivity>",
+          "length": "dyn",
+          "kind": "array",
+          "label": "HispaceActivity.UserActivity[]"
+        },
+        "t_mapping<t_array:dyn<t_struct<HispaceActivity.UserActivity>>>": {
+          "id": "t_mapping<t_array:dyn<t_struct<HispaceActivity.UserActivity>>>",
+          "valueType": "t_array:dyn<t_struct<HispaceActivity.UserActivity>>",
+          "label": "mapping(key => HispaceActivity.UserActivity[])",
+          "kind": "mapping"
+        }
+      },
+      "storage": [
+        {
+          "contract": "HispaceActivity",
+          "path": "..\\..\\..\\C\\workspace\\solidity\\contract-hispace\\contracts\\HispaceActivity.sol",
+          "label": "activityHistory",
+          "astId": 388,
+          "type": "t_mapping<t_array:dyn<t_struct<HispaceActivity.UserActivity>>>",
+          "src": "186:58:1"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    }
+  },
+  "solidityLibs": {},
+  "proxies": {
+    "contract-hispace/HispaceActivity": [
+      {
+        "address": "0x85D3d539E4908aA97Efa864649901c83B628186F",
+        "version": "1.0.0",
+        "implementation": "0x6bA8a909Daee8148089B799debd3e263a1731DdA",
+        "admin": "0xDfae1bbEe93B180e20dD3b7e2eB3739e5848200b",
+        "kind": "Upgradeable"
+      }
+    ]
+  },
+  "manifestVersion": "2.2",
+  "version": "1.0.0",
+  "proxyAdmin": {
+    "address": "0xDfae1bbEe93B180e20dD3b7e2eB3739e5848200b"
+  }
+}

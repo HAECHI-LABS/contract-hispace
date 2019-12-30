@@ -1,6 +1,8 @@
 {
   "manifestVersion": "2.2",
-  "contracts": {},
+  "contracts": {
+    "HispaceActivity": "HispaceActivity"
+  },
   "dependencies": {},
   "name": "contract-hispace",
   "version": "1.0.0",
