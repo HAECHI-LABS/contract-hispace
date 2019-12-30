@@ -27,7 +27,7 @@ contract HispaceActivity {
   }
 
   /**
-  * @dev 활동기록 - 좋아요
+  * @dev 활동기록 - 대상지정
   * @param activityType bytes32
   * @param to address
   * @param desc bytes
