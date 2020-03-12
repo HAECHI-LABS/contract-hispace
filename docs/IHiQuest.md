@@ -45,7 +45,7 @@
   - [extend(bytes32,uint256)](#IHiQuest--function--extend(bytes32,uint256))
 
 
-  - [changeManager(bytes32,uint256)](#IHiQuest--function--changeManager(bytes32,uint256))
+  - [changeManager(bytes32,address)](#IHiQuest--function--changeManager(bytes32,address))
 
 
   - [reward(bytes32,address,uint256)](#IHiQuest--function--reward(bytes32,address,uint256))
@@ -230,7 +230,7 @@ success : return true if succeeded
 | Name | Type | Description |
 |:-:|:-:| - |
 | _questId | `bytes32` | quest id to extend |
-| _time | `uint256` | amount of seconds to extend |
+| _duration | `uint256` | amount of seconds to extend |
 
 
 #### → Returns
@@ -242,7 +242,7 @@ success : return true if succeeded
 success : return true if succeeded
 
 </dd>
-<dt> <h3> changeManager(bytes32,uint256) <a name="IHiQuest--function--changeManager(bytes32,uint256)"></a> </h3> </dt>
+<dt> <h3> changeManager(bytes32,address) <a name="IHiQuest--function--changeManager(bytes32,address)"></a> </h3> </dt>
 <dd>
 
 >change manager of `_questId` to `_manager`
@@ -254,7 +254,7 @@ success : return true if succeeded
 | Name | Type | Description |
 |:-:|:-:| - |
 | _questId | `bytes32` | quest id to change manager |
-| _manager | `uint256` | address of new manager |
+| _manager | `address` | address of new manager |
 
 
 #### → Returns

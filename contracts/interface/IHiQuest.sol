@@ -59,16 +59,16 @@ interface IHiQuest {
 
   /// @notice extends `_questId` quest close date for `_time` seconds
   /// @param _questId quest id to extend
-  /// @param _time amount of seconds to extend
+  /// @param _duration amount of seconds to extend
   /// @return success : return true if succeeded
-  function extend(bytes32 _questId, uint256 _time) external returns (bool success);
+  function extend(bytes32 _questId, uint256 _duration) external returns (bool success);
 
   /// @notice change manager of `_questId` to `_manager`
   /// @dev onlyManager
   /// @param _questId quest id to change manager
   /// @param _manager address of new manager
   /// @return success : return true if succeeded
-  function changeManager(bytes32 _questId, uint256 _manager) external returns (bool success);
+  function changeManager(bytes32 _questId, address _manager) external returns (bool success);
 
   /// @notice rewards `_amount` of HiBlocks token to `_to` for joining `_questId` quest 
   /// @dev onlyManager
