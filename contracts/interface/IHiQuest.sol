@@ -23,7 +23,7 @@ interface HiQuest {
   /// @param questId id of quest
   /// @param user address of user
   /// @param desc description of joining quest
-  event JoinedHiquest(bytes32 questId, address user, bytes desc);
+  event UserJoined(bytes32 questId, address user, bytes desc);
 
   /// @notice emited when rewarded
   /// @param questId id of quest
