@@ -61,7 +61,7 @@ interface HiQuest {
   /// @param _questId quest id to extend
   /// @param _time amount of seconds to extend
   /// @return success : return true if succeeded
-  function extendCloseTime(bytes32 _questId, uint256 _time) external returns (bool success);
+  function extend(bytes32 _questId, uint256 _time) external returns (bool success);
 
   /// @notice change manager of `_questId` to `_manager`
   /// @dev onlyManager
