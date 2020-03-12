@@ -1,4 +1,4 @@
-# <span id="HiQuest"></span> HiQuest
+# <span id="IHiQuest"></span> IHiQuest
 > 
 
 
@@ -8,69 +8,69 @@
 ## Contents
 
 
-- [Events](#HiQuest--Events)
+- [Events](#IHiQuest--Events)
 
 
-  - [HiquestCreated](#HiQuest--event--HiquestCreated)
+  - [HiquestCreated](#IHiQuest--event--HiquestCreated)
 
 
-  - [HiquestExtended](#HiQuest--event--HiquestExtended)
+  - [HiquestExtended](#IHiQuest--event--HiquestExtended)
 
 
-  - [HiqeustManagerChanged](#HiQuest--event--HiqeustManagerChanged)
+  - [HiqeustManagerChanged](#IHiQuest--event--HiqeustManagerChanged)
 
 
-  - [UserJoined](#HiQuest--event--UserJoined)
+  - [UserJoined](#IHiQuest--event--UserJoined)
 
 
-  - [Rewarded](#HiQuest--event--Rewarded)
+  - [Rewarded](#IHiQuest--event--Rewarded)
 
 
-  - [HiquestClosed](#HiQuest--event--HiquestClosed)
+  - [HiquestClosed](#IHiQuest--event--HiquestClosed)
 
 
-  - [WithDrawn](#HiQuest--event--WithDrawn)
-
-
-
-- [Functions](#HiQuest--Functions)
-
-
-  - [create(bytes32,uint256,uint256,uint256)](#HiQuest--function--create(bytes32,uint256,uint256,uint256))
-
-
-  - [join(bytes32,bytes)](#HiQuest--function--join(bytes32,bytes))
-
-
-  - [extend(bytes32,uint256)](#HiQuest--function--extend(bytes32,uint256))
-
-
-  - [changeManager(bytes32,uint256)](#HiQuest--function--changeManager(bytes32,uint256))
-
-
-  - [reward(bytes32,address,uint256)](#HiQuest--function--reward(bytes32,address,uint256))
-
-
-  - [close(bytes32)](#HiQuest--function--close(bytes32))
-
-
-  - [withdrawDeposit(bytes32)](#HiQuest--function--withdrawDeposit(bytes32))
-
-
-  - [questInfo(bytes32)](#HiQuest--function--questInfo(bytes32))
-
-
-  - [managingQuests(address)](#HiQuest--function--managingQuests(address))
-
-
-  - [joinedUsers(bytes32)](#HiQuest--function--joinedUsers(bytes32))
+  - [WithDrawn](#IHiQuest--event--WithDrawn)
 
 
 
-## 🦄Events <a name="HiQuest--Events"></a>
+- [Functions](#IHiQuest--Functions)
 
 
-<details><summary><strong>HiquestCreated <a name="HiQuest--event--HiquestCreated"></a></strong></summary>
+  - [create(bytes32,uint256,uint256,uint256)](#IHiQuest--function--create(bytes32,uint256,uint256,uint256))
+
+
+  - [join(bytes32,bytes)](#IHiQuest--function--join(bytes32,bytes))
+
+
+  - [extend(bytes32,uint256)](#IHiQuest--function--extend(bytes32,uint256))
+
+
+  - [changeManager(bytes32,uint256)](#IHiQuest--function--changeManager(bytes32,uint256))
+
+
+  - [reward(bytes32,address,uint256)](#IHiQuest--function--reward(bytes32,address,uint256))
+
+
+  - [close(bytes32)](#IHiQuest--function--close(bytes32))
+
+
+  - [withdrawDeposit(bytes32)](#IHiQuest--function--withdrawDeposit(bytes32))
+
+
+  - [questInfo(bytes32)](#IHiQuest--function--questInfo(bytes32))
+
+
+  - [managingQuests(address)](#IHiQuest--function--managingQuests(address))
+
+
+  - [joinedUsers(bytes32)](#IHiQuest--function--joinedUsers(bytes32))
+
+
+
+## 🦄Events <a name="IHiQuest--Events"></a>
+
+
+<details><summary><strong>HiquestCreated <a name="IHiQuest--event--HiquestCreated"></a></strong></summary>
 <p>
 
 | Name | Indexed | Type |
@@ -86,7 +86,7 @@
 </details>
 
 
-<details><summary><strong>HiquestExtended <a name="HiQuest--event--HiquestExtended"></a></strong></summary>
+<details><summary><strong>HiquestExtended <a name="IHiQuest--event--HiquestExtended"></a></strong></summary>
 <p>
 
 | Name | Indexed | Type |
@@ -99,7 +99,7 @@
 </details>
 
 
-<details><summary><strong>HiqeustManagerChanged <a name="HiQuest--event--HiqeustManagerChanged"></a></strong></summary>
+<details><summary><strong>HiqeustManagerChanged <a name="IHiQuest--event--HiqeustManagerChanged"></a></strong></summary>
 <p>
 
 | Name | Indexed | Type |
@@ -112,7 +112,7 @@
 </details>
 
 
-<details><summary><strong>UserJoined <a name="HiQuest--event--UserJoined"></a></strong></summary>
+<details><summary><strong>UserJoined <a name="IHiQuest--event--UserJoined"></a></strong></summary>
 <p>
 
 | Name | Indexed | Type |
@@ -126,7 +126,7 @@
 </details>
 
 
-<details><summary><strong>Rewarded <a name="HiQuest--event--Rewarded"></a></strong></summary>
+<details><summary><strong>Rewarded <a name="IHiQuest--event--Rewarded"></a></strong></summary>
 <p>
 
 | Name | Indexed | Type |
@@ -140,7 +140,7 @@
 </details>
 
 
-<details><summary><strong>HiquestClosed <a name="HiQuest--event--HiquestClosed"></a></strong></summary>
+<details><summary><strong>HiquestClosed <a name="IHiQuest--event--HiquestClosed"></a></strong></summary>
 <p>
 
 | Name | Indexed | Type |
@@ -152,7 +152,7 @@
 </details>
 
 
-<details><summary><strong>WithDrawn <a name="HiQuest--event--WithDrawn"></a></strong></summary>
+<details><summary><strong>WithDrawn <a name="IHiQuest--event--WithDrawn"></a></strong></summary>
 <p>
 
 | Name | Indexed | Type |
@@ -166,9 +166,9 @@
 
 
 
-## 🚀Functions <a name="HiQuest--Functions"></a>
+## 🚀Functions <a name="IHiQuest--Functions"></a>
 <dl>
-<dt> <h3> create(bytes32,uint256,uint256,uint256) <a name="HiQuest--function--create(bytes32,uint256,uint256,uint256)"></a> </h3> </dt>
+<dt> <h3> create(bytes32,uint256,uint256,uint256) <a name="IHiQuest--function--create(bytes32,uint256,uint256,uint256)"></a> </h3> </dt>
 <dd>
 
 >create `_questId` quest from `_open` to `_close` and deposits `_deposit`amount of HiBlocks ERC20 token
@@ -194,7 +194,7 @@
 success : return true if succeeded
 
 </dd>
-<dt> <h3> join(bytes32,bytes) <a name="HiQuest--function--join(bytes32,bytes)"></a> </h3> </dt>
+<dt> <h3> join(bytes32,bytes) <a name="IHiQuest--function--join(bytes32,bytes)"></a> </h3> </dt>
 <dd>
 
 >joins `_questId` with given `_desc` message
@@ -218,7 +218,7 @@ success : return true if succeeded
 success : return true if succeeded
 
 </dd>
-<dt> <h3> extend(bytes32,uint256) <a name="HiQuest--function--extend(bytes32,uint256)"></a> </h3> </dt>
+<dt> <h3> extend(bytes32,uint256) <a name="IHiQuest--function--extend(bytes32,uint256)"></a> </h3> </dt>
 <dd>
 
 >extends `_questId` quest close date for `_time` seconds
@@ -242,7 +242,7 @@ success : return true if succeeded
 success : return true if succeeded
 
 </dd>
-<dt> <h3> changeManager(bytes32,uint256) <a name="HiQuest--function--changeManager(bytes32,uint256)"></a> </h3> </dt>
+<dt> <h3> changeManager(bytes32,uint256) <a name="IHiQuest--function--changeManager(bytes32,uint256)"></a> </h3> </dt>
 <dd>
 
 >change manager of `_questId` to `_manager`
@@ -266,7 +266,7 @@ success : return true if succeeded
 success : return true if succeeded
 
 </dd>
-<dt> <h3> reward(bytes32,address,uint256) <a name="HiQuest--function--reward(bytes32,address,uint256)"></a> </h3> </dt>
+<dt> <h3> reward(bytes32,address,uint256) <a name="IHiQuest--function--reward(bytes32,address,uint256)"></a> </h3> </dt>
 <dd>
 
 >rewards `_amount` of HiBlocks token to `_to` for joining `_questId` quest 
@@ -291,7 +291,7 @@ success : return true if succeeded
 success : return true if succeeded
 
 </dd>
-<dt> <h3> close(bytes32) <a name="HiQuest--function--close(bytes32)"></a> </h3> </dt>
+<dt> <h3> close(bytes32) <a name="IHiQuest--function--close(bytes32)"></a> </h3> </dt>
 <dd>
 
 >close `_questId` quest 
@@ -314,7 +314,7 @@ success : return true if succeeded
 success : return true if succeeded
 
 </dd>
-<dt> <h3> withdrawDeposit(bytes32) <a name="HiQuest--function--withdrawDeposit(bytes32)"></a> </h3> </dt>
+<dt> <h3> withdrawDeposit(bytes32) <a name="IHiQuest--function--withdrawDeposit(bytes32)"></a> </h3> </dt>
 <dd>
 
 >withdraws leftover HiBlocks token from `_questId` quest and sends to manager
@@ -337,7 +337,7 @@ success : return true if succeeded
 success : return true if succeeded
 
 </dd>
-<dt> <h3> questInfo(bytes32) <a name="HiQuest--function--questInfo(bytes32)"></a> </h3> </dt>
+<dt> <h3> questInfo(bytes32) <a name="IHiQuest--function--questInfo(bytes32)"></a> </h3> </dt>
 <dd>
 
 >view function to get data of quest
@@ -364,7 +364,7 @@ success : return true if succeeded
 
 
 </dd>
-<dt> <h3> managingQuests(address) <a name="HiQuest--function--managingQuests(address)"></a> </h3> </dt>
+<dt> <h3> managingQuests(address) <a name="IHiQuest--function--managingQuests(address)"></a> </h3> </dt>
 <dd>
 
 >view function to get managing questIds
@@ -387,7 +387,7 @@ success : return true if succeeded
 
 
 </dd>
-<dt> <h3> joinedUsers(bytes32) <a name="HiQuest--function--joinedUsers(bytes32)"></a> </h3> </dt>
+<dt> <h3> joinedUsers(bytes32) <a name="IHiQuest--function--joinedUsers(bytes32)"></a> </h3> </dt>
 <dd>
 
 >view function to get joined users

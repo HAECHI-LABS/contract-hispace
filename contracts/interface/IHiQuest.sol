@@ -2,7 +2,7 @@ pragma solidity 0.5.6;
 
 pragma experimental ABIEncoderV2;
 
-interface HiQuest {
+interface IHiQuest {
   /// @notice emited when Hiqeust is created
   /// @param questId id of created Hiquest
   /// @param manager address of quest manager
