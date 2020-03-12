@@ -1,5 +1,7 @@
 pragma solidity 0.5.6;
 
+pragma experimental ABIEncoderV2;
+
 interface HiQuest {
   /// @notice emited when Hiqeust is created
   /// @param questId id of created Hiquest
@@ -15,8 +17,8 @@ interface HiQuest {
   event HiquestExtended(bytes32 questId, uint256 close);
 
   /// @notice emited when manager of quest changed
-  /// @param questid id of quest
-  /// @param mananger new manager
+  /// @param questId id of quest
+  /// @param manager new manager
   event HiqeustManagerChanged(bytes32 questId, address manager);
 
   /// @notice emited when someone joined quest
@@ -90,13 +92,13 @@ interface HiQuest {
 
   /// @notice view function to get data of quest
   /// @param _questId id of quest to query
-  function questInfo(bytes32 _questId) external view returns(address manager, uint256 open, uint256 close, uint256 deposit, uint256 balance);
+  function questInfo(bytes32 _questId) external view returns(address manager, uint256 open, uint256 end, uint256 deposit, uint256 balance);
 
   /// @notice view function to get managing questIds
   /// @param _manager address of manager to query
-  function managingQuests(address _manager) external view returns(bytes[] quests);
+  function managingQuests(address _manager) external view returns(bytes[] memory quests);
 
   /// @notice view function to get joined users
   /// @param _questId id of quest to query
-  function joinedUsers(bytes32 _questId) external view returns(address[] users);
+  function joinedUsers(bytes32 _questId) external view returns(address[] memory users);
 }
