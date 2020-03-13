@@ -19,7 +19,7 @@ interface IHiQuest {
   /// @notice emited when manager of quest changed
   /// @param questId id of quest
   /// @param manager new manager
-  event HiqeustManagerChanged(bytes32 questId, address manager);
+  event HiquestManagerChanged(bytes32 questId, address manager);
 
   /// @notice emited when someone joined quest
   /// @param questId id of quest
@@ -58,6 +58,7 @@ interface IHiQuest {
   function join(bytes32 _questId, bytes calldata _desc) external returns (bool success);
 
   /// @notice extends `_questId` quest close date for `_time` seconds
+  /// @dev onlyManager
   /// @param _questId quest id to extend
   /// @param _duration amount of seconds to extend
   /// @return success : return true if succeeded
