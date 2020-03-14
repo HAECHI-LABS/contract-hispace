@@ -36,18 +36,6 @@
 - [Functions](#HiQuest--Functions)
 
 
-  - [joinedUsers(bytes32)](#HiQuest--function--joinedUsers(bytes32))
-
-
-  - [questInfo(bytes32)](#HiQuest--function--questInfo(bytes32))
-
-
-  - [withdrawDeposit(bytes32)](#HiQuest--function--withdrawDeposit(bytes32))
-
-
-  - [managingQuests(address)](#HiQuest--function--managingQuests(address))
-
-
   - [create(bytes32,uint256,uint256,uint256)](#HiQuest--function--create(bytes32,uint256,uint256,uint256))
 
 
@@ -66,7 +54,16 @@
   - [close(bytes32)](#HiQuest--function--close(bytes32))
 
 
-  - [withdraw(bytes32)](#HiQuest--function--withdraw(bytes32))
+  - [withdrawDeposit(bytes32)](#HiQuest--function--withdrawDeposit(bytes32))
+
+
+  - [questInfo(bytes32)](#HiQuest--function--questInfo(bytes32))
+
+
+  - [managingQuests(address)](#HiQuest--function--managingQuests(address))
+
+
+  - [joinedUsers(bytes32)](#HiQuest--function--joinedUsers(bytes32))
 
 
 
@@ -171,102 +168,6 @@
 
 ## 🚀Functions <a name="HiQuest--Functions"></a>
 <dl>
-<dt> <h3> joinedUsers(bytes32) <a name="HiQuest--function--joinedUsers(bytes32)"></a> </h3> </dt>
-<dd>
-
->view function to get joined users
-
- 👀 `view`
-
-#### ⚙️ Parameters
-
-| Name | Type | Description |
-|:-:|:-:| - |
-| _questId | `bytes32` | id of quest to query |
-
-
-#### → Returns
-
-| Name | Type |
-|:-:|:-:|
-|  users  | `address[]` |
-
-
-
-</dd>
-<dt> <h3> questInfo(bytes32) <a name="HiQuest--function--questInfo(bytes32)"></a> </h3> </dt>
-<dd>
-
->view function to get data of quest
-
- 👀 `view`
-
-#### ⚙️ Parameters
-
-| Name | Type | Description |
-|:-:|:-:| - |
-| _questId | `bytes32` | id of quest to query |
-
-
-#### → Returns
-
-| Name | Type |
-|:-:|:-:|
-|  manager  | `address` |
-|  open  | `uint256` |
-|  end  | `uint256` |
-|  deposit  | `uint256` |
-|  balance  | `uint256` |
-
-
-
-</dd>
-<dt> <h3> withdrawDeposit(bytes32) <a name="HiQuest--function--withdrawDeposit(bytes32)"></a> </h3> </dt>
-<dd>
-
->withdraws leftover HiBlocks token from `_questId` quest and sends to manager
-
-🔨`onlyManager` |  👀 `nonpayable`
-
-#### ⚙️ Parameters
-
-| Name | Type | Description |
-|:-:|:-:| - |
-| _questId | `bytes32` | quest id to withdraw from |
-
-
-#### → Returns
-
-| Name | Type |
-|:-:|:-:|
-|  success  | `bool` |
-
-success : return true if succeeded
-
-</dd>
-<dt> <h3> managingQuests(address) <a name="HiQuest--function--managingQuests(address)"></a> </h3> </dt>
-<dd>
-
->view function to get managing questIds
-
- 👀 `view`
-
-#### ⚙️ Parameters
-
-| Name | Type | Description |
-|:-:|:-:| - |
-| _manager | `address` | address of manager to query |
-
-
-#### → Returns
-
-| Name | Type |
-|:-:|:-:|
-|  quests  | `bytes[]` |
-
-
-
-</dd>
 <dt> <h3> create(bytes32,uint256,uint256,uint256) <a name="HiQuest--function--create(bytes32,uint256,uint256,uint256)"></a> </h3> </dt>
 <dd>
 
@@ -351,7 +252,7 @@ success : return true if succeeded
 
 
 </dd>
-<dt> <h3> withdraw(bytes32) <a name="HiQuest--function--withdraw(bytes32)"></a> </h3> </dt>
+<dt> <h3> withdrawDeposit(bytes32) <a name="HiQuest--function--withdrawDeposit(bytes32)"></a> </h3> </dt>
 <dd>
 
  👀 `nonpayable`
@@ -361,6 +262,52 @@ success : return true if succeeded
 | Name | Type |
 |:-:|:-:|
 |  Not specified  | `bool` |
+
+
+
+</dd>
+<dt> <h3> questInfo(bytes32) <a name="HiQuest--function--questInfo(bytes32)"></a> </h3> </dt>
+<dd>
+
+ 👀 `view`
+
+#### → Returns
+
+| Name | Type |
+|:-:|:-:|
+|  manager  | `address` |
+|  open  | `uint256` |
+|  end  | `uint256` |
+|  deposit  | `uint256` |
+|  balance  | `uint256` |
+
+
+
+</dd>
+<dt> <h3> managingQuests(address) <a name="HiQuest--function--managingQuests(address)"></a> </h3> </dt>
+<dd>
+
+ 👀 `view`
+
+#### → Returns
+
+| Name | Type |
+|:-:|:-:|
+|  quests  | `bytes32[]` |
+
+
+
+</dd>
+<dt> <h3> joinedUsers(bytes32) <a name="HiQuest--function--joinedUsers(bytes32)"></a> </h3> </dt>
+<dd>
+
+ 👀 `view`
+
+#### → Returns
+
+| Name | Type |
+|:-:|:-:|
+|  users  | `address[]` |
 
 
 

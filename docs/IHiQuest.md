@@ -382,7 +382,7 @@ success : return true if succeeded
 
 | Name | Type |
 |:-:|:-:|
-|  quests  | `bytes[]` |
+|  quests  | `bytes32[]` |
 
 
 
