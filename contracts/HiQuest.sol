@@ -104,12 +104,29 @@ contract HiQuest is IHiQuest {
     return true;
   }
 
-  function withdraw(bytes32 _questId) external onlyManager(_questId) returns(bool) {
+  function withdrawDeposit(bytes32 _questId) external onlyManager(_questId) returns(bool) {
     Quest memory quest = _quests[_questId];
     require(quest.closed, "Withdraw/Cannot withdraw from not closed quest");
     _token.transfer(msg.sender, quest.balance);
     emit WithDrawn(_questId, quest.balance);
     return true;
+  }
+
+  function questInfo(bytes32 _questId) external view returns(address manager, uint256 open, uint256 end, uint256 deposit, uint256 balance) {
+    Quest memory quest = _quests[_questId];
+    manager = quest.manager;
+    open = quest.open;
+    end = quest.close;
+    deposit = quest.deposit;
+    balance = quest.balance;
+  }
+
+  function managingQuests(address _manager) external view returns(bytes32[] memory quests) {
+    return _managing[_manager];
+  }
+
+  function joinedUsers(bytes32 _questId) external view returns(address[] memory users) {
+    return _users[_questId];
   }
 
   function _deleteFromManaging(bytes32[] storage _managed, bytes32 _questId) internal returns (bool) {

@@ -1,7 +1,5 @@
 pragma solidity 0.5.6;
 
-pragma experimental ABIEncoderV2;
-
 interface IHiQuest {
   /// @notice emited when Hiqeust is created
   /// @param questId id of created Hiquest
@@ -97,7 +95,7 @@ interface IHiQuest {
 
   /// @notice view function to get managing questIds
   /// @param _manager address of manager to query
-  function managingQuests(address _manager) external view returns(bytes[] memory quests);
+  function managingQuests(address _manager) external view returns(bytes32[] memory quests);
 
   /// @notice view function to get joined users
   /// @param _questId id of quest to query
