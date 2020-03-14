@@ -17,7 +17,7 @@
   - [HiquestExtended](#IHiQuest--event--HiquestExtended)
 
 
-  - [HiqeustManagerChanged](#IHiQuest--event--HiqeustManagerChanged)
+  - [HiquestManagerChanged](#IHiQuest--event--HiquestManagerChanged)
 
 
   - [UserJoined](#IHiQuest--event--UserJoined)
@@ -99,7 +99,7 @@
 </details>
 
 
-<details><summary><strong>HiqeustManagerChanged <a name="IHiQuest--event--HiqeustManagerChanged"></a></strong></summary>
+<details><summary><strong>HiquestManagerChanged <a name="IHiQuest--event--HiquestManagerChanged"></a></strong></summary>
 <p>
 
 | Name | Indexed | Type |
@@ -223,7 +223,7 @@ success : return true if succeeded
 
 >extends `_questId` quest close date for `_time` seconds
 
- 👀 `nonpayable`
+🔨`onlyManager` |  👀 `nonpayable`
 
 #### ⚙️ Parameters
 
