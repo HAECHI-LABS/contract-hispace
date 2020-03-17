@@ -79,7 +79,7 @@ interface IHiQuest {
 
   /// @notice view function to get data of quest
   /// @param _questId id of quest to query
-  function questInfo(bytes32 _questId) external view returns(address manager, uint256 open, uint256 end, uint256 deposit, uint256 balance);
+  function questInfo(bytes32 _questId) external view returns(address manager, uint256 open, uint256 end, uint256 deposit, uint256 balance, bool closed);
 
   /// @notice view function to get managing questIds
   /// @param _manager address of manager to query

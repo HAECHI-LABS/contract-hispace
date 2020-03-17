@@ -60,22 +60,4 @@ interface HiblocksIERC20 {
      */
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
 
-    /**
-     * @dev Returns total tokens held by an address (transferable + locked + staked)
-     * @param _addr The address to query the total balance of
-     */
-    function totalBalanceOf(address _addr) external view returns (uint256 amount, uint256 token, uint256 locked, uint256 staked);
-
-    /**
-    * @dev Transfer token for a specified address with memo
-    * @param to The address to transfer to.
-    * @param value The amount to be transferred.
-    * @param memo The memo to be saved.
-    */
-    function transferWithMemo(address to, uint256 value, bytes calldata memo) external returns (bool);
-
-    /**
-     * @dev Check for administrator privileges.
-     */
-    function isWhitelistAdmin(address sender) external view returns (bool);
 }

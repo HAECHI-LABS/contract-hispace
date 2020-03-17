@@ -34,7 +34,7 @@ contract HiQuest is IHiQuest {
 
   function create(bytes32 _questId, uint256 _open, uint256 _close, uint256 _deposit) external returns(bool) {
     Quest storage quest = _quests[_questId];
-    require(quest.manager != address(0),"Create/Duplicated questId");
+    require(quest.manager == address(0),"Create/Duplicated questId");
     require(_token.transferFrom(msg.sender, address(this), _deposit), "Create/Deposit Error");
     require(_close > now, "Create/Close time should be future");
 
@@ -51,10 +51,11 @@ contract HiQuest is IHiQuest {
   }
 
   function join(bytes32 _questId, bytes calldata desc) external returns(bool) {
+    require(_quests[_questId].manager != address(0), "Join/Quest does not exist");
     require(!_joined[_questId][msg.sender], "Join/Already Joined");
     Quest memory quest = _quests[_questId];
     require(quest.open < now,"Join/Quest is not opened yet");
-    require(quest.close > now || !quest.closed, "Join/Quest is already closed");
+    require(quest.close > now , "Join/Quest is already closed");
     _joined[_questId][msg.sender] = true;
     _joinDesc[_questId][msg.sender] = desc;
     _users[_questId].push(msg.sender);
@@ -73,12 +74,12 @@ contract HiQuest is IHiQuest {
   }
   
   function reward(bytes32 _questId, address _to, uint256 _amount) external onlyManager(_questId) returns(bool) {
-    require(_joined[_questId][_to], "Reward/Cannot reward not joined user");
     Quest storage quest = _quests[_questId];
     require(quest.open < now, "Reward/Quest not opened yet");
+    require(_joined[_questId][_to], "Reward/Cannot reward not joined user");
     require(quest.balance > quest.balance - _amount, "Reward/Invalid amount of reward");
-    _token.transfer(_to, _amount);
     quest.balance = quest.balance - _amount;
+    _token.transfer(_to, _amount);
     emit Rewarded(_questId, _to, _amount);
     return true;
   }
@@ -88,26 +89,28 @@ contract HiQuest is IHiQuest {
     require(quest.open > now || quest.close < now, "Close/Quest cannot be closed during announced period");
     require(!quest.closed, "Close/Quest already closed");
     quest.closed = true;
-    _deleteFromManaging(_managing[msg.sender], _questId);
     emit HiquestClosed(_questId);
     return true;
   }
 
   function withdrawDeposit(bytes32 _questId) external onlyManager(_questId) returns(bool) {
-    Quest memory quest = _quests[_questId];
+    Quest storage quest = _quests[_questId];
     require(quest.closed, "Withdraw/Cannot withdraw from not closed quest");
-    _token.transfer(msg.sender, quest.balance);
-    emit WithDrawn(_questId, quest.balance);
+    uint256 amount = quest.balance;
+    quest.balance = 0;
+    _token.transfer(msg.sender, amount);
+    emit WithDrawn(_questId, amount);
     return true;
   }
 
-  function questInfo(bytes32 _questId) external view returns(address manager, uint256 open, uint256 end, uint256 deposit, uint256 balance) {
+  function questInfo(bytes32 _questId) external view returns(address manager, uint256 open, uint256 end, uint256 deposit, uint256 balance, bool closed) {
     Quest memory quest = _quests[_questId];
     manager = quest.manager;
     open = quest.open;
     end = quest.close;
     deposit = quest.deposit;
     balance = quest.balance;
+    closed = quest.closed;
   }
 
   function managingQuests(address _manager) external view returns(bytes32[] memory quests) {
