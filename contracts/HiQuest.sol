@@ -62,17 +62,6 @@ contract HiQuest is IHiQuest {
     return true;
   }
 
-  function extend(bytes32 _questId, uint256 _duration) external onlyManager(_questId) returns(bool) {
-    require(_duration != 0, "Extend/Duration should be larger than 0");
-    Quest storage quest = _quests[_questId];
-    require(!quest.closed, "Extend/Quest already closed");
-    require(quest.close + _duration > now ,"Extend/Extended close time should be future");
-    quest.close = quest.close + _duration;
-    require(quest.close > _duration, "Extend/Overflow on close time check duration");
-    emit HiquestExtended(_questId, quest.close);
-    return true;
-  }
-
   function changeManager(bytes32 _questId, address _manager) external onlyManager(_questId) returns(bool) {
     require(_manager != address(0), "ChangeManager/Manager cannot be zero address");
     _quests[_questId].manager = _manager;

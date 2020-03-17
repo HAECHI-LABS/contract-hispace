@@ -55,13 +55,6 @@ interface IHiQuest {
   /// @return success : return true if succeeded
   function join(bytes32 _questId, bytes calldata _desc) external returns (bool success);
 
-  /// @notice extends `_questId` quest close date for `_time` seconds
-  /// @dev onlyManager
-  /// @param _questId quest id to extend
-  /// @param _duration amount of seconds to extend
-  /// @return success : return true if succeeded
-  function extend(bytes32 _questId, uint256 _duration) external returns (bool success);
-
   /// @notice change manager of `_questId` to `_manager`
   /// @dev onlyManager
   /// @param _questId quest id to change manager
