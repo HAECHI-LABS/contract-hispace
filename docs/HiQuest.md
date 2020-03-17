@@ -14,9 +14,6 @@
   - [HiquestCreated](#HiQuest--event--HiquestCreated)
 
 
-  - [HiquestExtended](#HiQuest--event--HiquestExtended)
-
-
   - [HiquestManagerChanged](#HiQuest--event--HiquestManagerChanged)
 
 
@@ -40,9 +37,6 @@
 
 
   - [join(bytes32,bytes)](#HiQuest--function--join(bytes32,bytes))
-
-
-  - [extend(bytes32,uint256)](#HiQuest--function--extend(bytes32,uint256))
 
 
   - [changeManager(bytes32,address)](#HiQuest--function--changeManager(bytes32,address))
@@ -80,19 +74,6 @@
 | open | `false` | `uint256` |
 | close | `false` | `uint256` |
 | deposit | `false` | `uint256` |
-
-</p>
-
-</details>
-
-
-<details><summary><strong>HiquestExtended <a name="HiQuest--event--HiquestExtended"></a></strong></summary>
-<p>
-
-| Name | Indexed | Type |
-|:-:|:-:|:-:|
-| questId | `false` | `bytes32` |
-| close | `false` | `uint256` |
 
 </p>
 
@@ -196,20 +177,6 @@
 
 
 </dd>
-<dt> <h3> extend(bytes32,uint256) <a name="HiQuest--function--extend(bytes32,uint256)"></a> </h3> </dt>
-<dd>
-
- 👀 `nonpayable`
-
-#### → Returns
-
-| Name | Type |
-|:-:|:-:|
-|  Not specified  | `bool` |
-
-
-
-</dd>
 <dt> <h3> changeManager(bytes32,address) <a name="HiQuest--function--changeManager(bytes32,address)"></a> </h3> </dt>
 <dd>
 
@@ -280,6 +247,7 @@
 |  end  | `uint256` |
 |  deposit  | `uint256` |
 |  balance  | `uint256` |
+|  closed  | `bool` |
 
 
 

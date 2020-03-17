@@ -14,9 +14,6 @@
   - [HiquestCreated](#IHiQuest--event--HiquestCreated)
 
 
-  - [HiquestExtended](#IHiQuest--event--HiquestExtended)
-
-
   - [HiquestManagerChanged](#IHiQuest--event--HiquestManagerChanged)
 
 
@@ -40,9 +37,6 @@
 
 
   - [join(bytes32,bytes)](#IHiQuest--function--join(bytes32,bytes))
-
-
-  - [extend(bytes32,uint256)](#IHiQuest--function--extend(bytes32,uint256))
 
 
   - [changeManager(bytes32,address)](#IHiQuest--function--changeManager(bytes32,address))
@@ -80,19 +74,6 @@
 | open | `false` | `uint256` |
 | close | `false` | `uint256` |
 | deposit | `false` | `uint256` |
-
-</p>
-
-</details>
-
-
-<details><summary><strong>HiquestExtended <a name="IHiQuest--event--HiquestExtended"></a></strong></summary>
-<p>
-
-| Name | Indexed | Type |
-|:-:|:-:|:-:|
-| questId | `false` | `bytes32` |
-| close | `false` | `uint256` |
 
 </p>
 
@@ -207,30 +188,6 @@ success : return true if succeeded
 |:-:|:-:| - |
 | _questId | `bytes32` | quest id to join |
 | _desc | `bytes` | description of joining |
-
-
-#### → Returns
-
-| Name | Type |
-|:-:|:-:|
-|  success  | `bool` |
-
-success : return true if succeeded
-
-</dd>
-<dt> <h3> extend(bytes32,uint256) <a name="IHiQuest--function--extend(bytes32,uint256)"></a> </h3> </dt>
-<dd>
-
->extends `_questId` quest close date for `_time` seconds
-
-🔨`onlyManager` |  👀 `nonpayable`
-
-#### ⚙️ Parameters
-
-| Name | Type | Description |
-|:-:|:-:| - |
-| _questId | `bytes32` | quest id to extend |
-| _duration | `uint256` | amount of seconds to extend |
 
 
 #### → Returns
@@ -360,6 +317,7 @@ success : return true if succeeded
 |  end  | `uint256` |
 |  deposit  | `uint256` |
 |  balance  | `uint256` |
+|  closed  | `bool` |
 
 
 

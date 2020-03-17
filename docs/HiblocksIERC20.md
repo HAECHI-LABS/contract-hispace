@@ -32,15 +32,6 @@ Interface of the ERC20 standard as defined in the EIP. Does not include the opti
   - [transferFrom(address,address,uint256)](#HiblocksIERC20--function--transferFrom(address,address,uint256))
 
 
-  - [totalBalanceOf(address)](#HiblocksIERC20--function--totalBalanceOf(address))
-
-
-  - [transferWithMemo(address,uint256,bytes)](#HiblocksIERC20--function--transferWithMemo(address,uint256,bytes))
-
-
-  - [isWhitelistAdmin(address)](#HiblocksIERC20--function--isWhitelistAdmin(address))
-
-
 
 ## 🚀Functions <a name="HiblocksIERC20--Functions"></a>
 <dl>
@@ -118,67 +109,6 @@ Interface of the ERC20 standard as defined in the EIP. Does not include the opti
 <dd>
 
 🔨`Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller&#39;s allowance.     * Returns a boolean value indicating whether the operation succeeded.     * Emits a {Transfer} event.` |  👀 `nonpayable`
-
-#### → Returns
-
-| Name | Type |
-|:-:|:-:|
-|  Not specified  | `bool` |
-
-
-
-</dd>
-<dt> <h3> totalBalanceOf(address) <a name="HiblocksIERC20--function--totalBalanceOf(address)"></a> </h3> </dt>
-<dd>
-
-🔨`Returns total tokens held by an address (transferable + locked + staked)` |  👀 `view`
-
-#### ⚙️ Parameters
-
-| Name | Type | Description |
-|:-:|:-:| - |
-| _addr | `address` | The address to query the total balance of |
-
-
-#### → Returns
-
-| Name | Type |
-|:-:|:-:|
-|  amount  | `uint256` |
-|  token  | `uint256` |
-|  locked  | `uint256` |
-|  staked  | `uint256` |
-
-
-
-</dd>
-<dt> <h3> transferWithMemo(address,uint256,bytes) <a name="HiblocksIERC20--function--transferWithMemo(address,uint256,bytes)"></a> </h3> </dt>
-<dd>
-
-🔨`Transfer token for a specified address with memo` |  👀 `nonpayable`
-
-#### ⚙️ Parameters
-
-| Name | Type | Description |
-|:-:|:-:| - |
-| to | `address` | The address to transfer to. |
-| value | `uint256` | The amount to be transferred. |
-| memo | `bytes` | The memo to be saved. |
-
-
-#### → Returns
-
-| Name | Type |
-|:-:|:-:|
-|  Not specified  | `bool` |
-
-
-
-</dd>
-<dt> <h3> isWhitelistAdmin(address) <a name="HiblocksIERC20--function--isWhitelistAdmin(address)"></a> </h3> </dt>
-<dd>
-
-🔨`Check for administrator privileges.` |  👀 `view`
 
 #### → Returns
 
