@@ -9,11 +9,6 @@ interface IHiQuest {
   /// @param deposit HiBlocks ERC20 deposit amount
   event HiquestCreated(bytes32 questId, address manager, uint256 open, uint256 close, uint256 deposit);
 
-  /// @notice emited when Hiquest close time is extended
-  /// @param questId id of quest
-  /// @param close new close time
-  event HiquestExtended(bytes32 questId, uint256 close);
-
   /// @notice emited when manager of quest changed
   /// @param questId id of quest
   /// @param manager new manager
