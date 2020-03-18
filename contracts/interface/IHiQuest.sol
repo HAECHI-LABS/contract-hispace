@@ -1,5 +1,10 @@
 pragma solidity 0.5.6;
 
+
+///@title Quest Control Smart Contract for HiQuest
+///@author taek lee <taeklee@haechi.io>
+///@notice Create/Join/Reward/Close/WithDraw
+///@dev should enforce manager to approve(-1) of hiblockstoken
 interface IHiQuest {
   /// @notice emited when Hiqeust is created
   /// @param questId id of created Hiquest
@@ -57,7 +62,7 @@ interface IHiQuest {
   /// @return success : return true if succeeded
   function changeManager(bytes32 _questId, address _manager) external returns (bool success);
 
-  /// @notice rewards `_amount` of HiBlocks token to `_to` for joining `_questId` quest 
+  /// @notice rewards `_amount` of HiBlocks token to `_to` for joining `_questId` quest
   /// @dev onlyManager
   /// @param _questId quest id to give reward
   /// @param _to beneficiary of reward
@@ -65,7 +70,7 @@ interface IHiQuest {
   /// @return success : return true if succeeded
   function reward(bytes32 _questId, address _to, uint256 _amount) external returns (bool success);
 
-  /// @notice close `_questId` quest 
+  /// @notice close `_questId` quest
   /// @dev onlyManager
   /// @param _questId quest id to close
   /// @return success : return true if succeeded
