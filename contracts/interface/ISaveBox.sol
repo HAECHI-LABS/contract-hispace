@@ -27,7 +27,8 @@ interface ISaveBox {
     /// @dev if boxId == bytes32(0), it is individual stake
     /// @param boxId id of staked box
     /// @param staker address of unstaker
-    event Unstake(bytes32 boxId, address staker);
+    /// @param amount amount of unstaked token
+    event Unstake(bytes32 boxId, address staker, uint256 amount);
 
     /// @notice creates box
     /// @dev anyone can call this function
