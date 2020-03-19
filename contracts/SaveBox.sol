@@ -17,7 +17,7 @@ contract SaveBox is ISaveBox {
     mapping(address => uint256) _nonce;
 
     mapping(bytes32 => Box) _box;
-    mapping(bytes32 => mapping(address=>uint256) _stake;
+    mapping(bytes32 => mapping(address=>uint256)) _stake;
 
     constructor(address _tokenAddr) public {
         _token = HiblocksIERC20(_tokenAddr);
@@ -32,8 +32,49 @@ contract SaveBox is ISaveBox {
     }
 
     function stakeTo(bytes32 _boxId, uint256 _amount) external returns (bool) {
-        Box storage box = _box[_boxId];
+        Box memory box = _box[_boxId];
         require(box.creator != address(0), "StakeTo/Box does not exist");
+        require(!box.destroyed, "StakeTo/Box is destroyed");
+        return _stakeTo(_boxId, _amount);
+    }
+
+    function unstakeFrom(bytes32 _boxId) external returns (bool) {
+        Box memory box = _box[_boxId];
+        require(box.creator != address(0), "UnstakeFrom/Box does not exist");
+        return _unstake(_boxId);
+    }
+
+    function destroyBox(bytes32 _boxId) external returns (bool) {
+        Box storage box = _box[_boxId];
+        require(box.creator == msg.sender, "Destroy/Only creator can destroy box");
+        require(box.balance == 0, "Destroy/Cannot destroy when box has balance");
+        box.destroyed = true;
+        emit BoxDestroyed(_boxId);
+        return true;
+    }
+
+    function stake(uint256 _amount) external returns (bool) {
+        return _stakeTo(bytes32(0), _amount);
+    }
+
+    function unstake() external returns (bool) {
+        return _unstake(bytes32(0));
+    }
+
+    function stakeAmount(bytes32 _boxId, address _staker) external view returns (uint256) {
+        return _stake[_boxId][_staker];
+    }
+
+    function boxInfo(bytes32 _boxId) external view returns (address creator, uint256 createdAt, uint256 balance, bool destroyed) {
+        Box memory box = _box[_boxId];
+        creator = box.creator;
+        createdAt = box.createdAt;
+        balance = box.balance;
+        destroyed = box.destroyed;
+    }
+
+    function _stakeTo(bytes32 _boxId, uint256 _amount) internal returns (bool) {
+        Box storage box = _box[_boxId];
         box.balance = box.balance + _amount;
         _stake[_boxId][msg.sender] = _stake[_boxId][msg.sender] + _amount;
         _token.transferFrom(msg.sender, address(this), _amount);
@@ -41,13 +82,12 @@ contract SaveBox is ISaveBox {
         return true;
     }
 
-    function unstakeFrom(bytes32 _boxId) external returns (bool) {
+    function _unstake(bytes32 _boxId) internal returns (bool) {
         Box storage box = _box[_boxId];
-        require(box.creator != address(0), "UnstakeFrom/Box does not exist");
         uint256 amount = _stake[_boxId][msg.sender];
         box.balance = box.balance - amount;
+        _stake[_boxId][msg.sender] = 0;
         _token.transfer(msg.sender, amount);
-        emit Ustake(_boxId, msg.sender, amount);
-        return true;
+        emit Unstake(_boxId, msg.sender, amount);
     }
 }

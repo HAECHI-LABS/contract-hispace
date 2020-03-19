@@ -63,11 +63,6 @@ interface ISaveBox {
     /// @return success true if succeeded
     function unstake() external returns (bool);
 
-    /// @notice returns all stakers of `_boxId`
-    /// @dev _boxId is bytes32(0) for individual staking
-    /// @return stakers : address of all stakers
-    function staker(bytes32 _boxId) external view returns (address memory [] stakers);
-
     /// @notice returns stake amount of `_staker` at `_boxId`
     /// @dev _boxId is bytes32(0), for individual staking
     /// @return amount of stake
