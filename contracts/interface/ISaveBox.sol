@@ -65,12 +65,12 @@ interface ISaveBox {
     /// @notice returns all stakers of `_boxId`
     /// @dev _boxId is bytes32(0) for individual staking
     /// @return stakers : address of all stakers
-    function staker(bytes32 _boxId) returns (address memory [] stakers);
+    function staker(bytes32 _boxId) external view returns (address memory [] stakers);
 
     /// @notice returns stake amount of `_staker` at `_boxId`
     /// @dev _boxId is bytes32(0), for individual staking
     /// @return amount of stake
-    function stakeAmount(bytes32 _boxId, address _staker) returns (uint256);
+    function stakeAmount(bytes32 _boxId, address _staker) external view returns (uint256);
 
     /// @notice returns save box info of `_boxId` box
     /// @param _boxId id of box to query
@@ -78,5 +78,5 @@ interface ISaveBox {
     /// @return createdAt : second of created time as unix timestamp
     /// @return balance : total amount of stake
     /// @return destroyed : true if destroyed
-    function boxInfo(bytes32 _boxId) returns (address creator, uint256 createdAt, uint256 balance, bool destroyed);
+    function boxInfo(bytes32 _boxId) external view returns (address creator, uint256 createdAt, uint256 balance, bool destroyed);
 }
