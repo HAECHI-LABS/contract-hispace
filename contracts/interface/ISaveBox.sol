@@ -63,6 +63,12 @@ interface ISaveBox {
     /// @return success true if succeeded
     function unstake() external returns (bool);
 
+    /// @notice get boxId using creator address and nonce
+    /// @param _creator creator address
+    /// @param _nonce nonce used to create box
+    /// @return boxId as bytes32
+    function boxId(address _creator, uint256 _nonce) external view returns (bytes32);
+
     /// @notice returns stake amount of `_staker` at `_boxId`
     /// @dev _boxId is bytes32(0), for individual staking
     /// @return amount of stake

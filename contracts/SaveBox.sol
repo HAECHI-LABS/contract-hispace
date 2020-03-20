@@ -61,6 +61,10 @@ contract SaveBox is ISaveBox {
         return _unstake(bytes32(0));
     }
 
+    function boxId(address _creator, uint256 _nonce) external view returns (bytes32) {
+        return keccak256(abi.encodePacked(msg.sender, _nonce));
+    }
+
     function stakeAmount(bytes32 _boxId, address _staker) external view returns (uint256) {
         return _stake[_boxId][_staker];
     }
