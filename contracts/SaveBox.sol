@@ -20,6 +20,7 @@ contract SaveBox is ISaveBox {
     mapping(bytes32 => mapping(address=>uint256)) _stake;
 
     constructor(address _tokenAddr) public {
+        require(_tokenAddr != address(0), "SaveBox/token address cannot be zero");
         _token = HiblocksIERC20(_tokenAddr);
     }
 
@@ -41,6 +42,7 @@ contract SaveBox is ISaveBox {
     function unstakeFrom(bytes32 _boxId) external returns (bool) {
         Box memory box = _box[_boxId];
         require(box.creator != address(0), "UnstakeFrom/Box does not exist");
+        require(!box.destroyed, "UnstakeFrom/Box is destroyed");
         return _unstake(_boxId);
     }
 
@@ -61,8 +63,8 @@ contract SaveBox is ISaveBox {
         return _unstake(bytes32(0));
     }
 
-    function boxId(address _creator, uint256 _nonce) external view returns (bytes32) {
-        return keccak256(abi.encodePacked(msg.sender, _nonce));
+    function boxId(address _creator, uint256 _salt) external view returns (bytes32) {
+        return keccak256(abi.encodePacked(_creator, _salt));
     }
 
     function stakeAmount(bytes32 _boxId, address _staker) external view returns (uint256) {
