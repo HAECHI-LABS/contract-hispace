@@ -1,6 +1,6 @@
 const HDWalletProvider = require("truffle-hdwallet-provider-klaytn");
 
-const privateKey = "0x879c00447f38af4d72b2ac870b16fe62b54566d210e1dfa52449f2f90f0e0dc6";
+const privateKey = "0x75f233d254dd6d2f73dce771f57522c2549a89e5c06321c570b4a521f75c7448";
 module.exports = {
   plugins: ['solidity-coverage'],
   networks: {
