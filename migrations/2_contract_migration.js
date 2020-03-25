@@ -17,5 +17,10 @@ module.exports = (deployer, network, accounts) => {
     await token.approve(quest.address, -1);
     const receipt = await quest.create(web3.utils.randomHex(32), 0, 10000000000, 100);
     console.log(receipt.logs[0].args);
+  }).then(async () => {
+    savebox = await deployer.deploy(SaveBox, token.address);
+    await token.approve(savebox.address, -1);
+    const receipt = await savebox.createBox();
+    console.log(receipt.logs[0].args);
   });
 };
