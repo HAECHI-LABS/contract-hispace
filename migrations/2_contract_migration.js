@@ -1,11 +1,11 @@
 const fs = require("fs");
 const HiQuest = artifacts.require("HiQuest");
-const Token = artifacts.require("HiblocksMock");
+const Token = artifacts.require("HiblocksToken");
 module.exports = (deployer, network, accounts) => {
   let token;
   let quest;
   deployer.then( async ()=>{
-    token = await deployer.deploy(Token);
+    token = await deployer.deploy(Token,"Hiblocks","HIBS",18, 1000000000000);
   }).then(async()=>{
     quest = await deployer.deploy(HiQuest, token.address);
     await token.approve(quest.address, -1);
