@@ -37,12 +37,19 @@ contract HiblocksMock is HiblocksIERC20 {
     return true;
   }
 
-  function transferFrom(address _account, address _to, uint256 _amount) external returns(bool) {
+  function transferFrom(address _account, address _to, uint256 _amount) external returns (bool) {
     require(_allowance[_account][msg.sender] >= _amount);
     require(_balances[_account] >= _amount);
     _allowance[_account][msg.sender] = _allowance[_account][msg.sender] - _amount;
     _balances[_account] = _balances[_account] - _amount;
     _balances[_to] = _balances[_to] + _amount;
     return true;
+  }
+
+  function totalBalanceOf(address _addr) external view returns (uint256 amount, uint256 token, uint256 locked, uint256 staked) {
+    amount = 1;
+    token = 2;
+    locked = 3;
+    staked = 4;
   }
 }

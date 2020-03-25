@@ -2,17 +2,15 @@ const fs = require('fs-extra');
 const path = require('path');
 const Caver = require('caver-js');
 
-const walletFactoryInfo = fs.readJsonSync(path.join(__dirname, '../build/contracts/WalletFactory.json'));
-const masterWalletInfo = fs.readJsonSync(path.join(__dirname, '../build/contracts/HenesisMasterWallet.json'));
-const userWalletInfo = fs.readJsonSync(path.join(__dirname, '../build/contracts/HenesisUserWallet.json'));
-const registryInfo = fs.readJsonSync(path.join(__dirname, '../build/contracts/WalletRegistry.json'));
+const TokenContractInfo = fs.readJsonSync(path.join(__dirname, '../build/contracts/HiblocksMock.json'));
+const QuestInfo = fs.readJsonSync(path.join('../build/contracts/HiQuest.json'));
 
 const chainEndpoint = 'https://api.baobab.klaytn.net:8651';
-console.log(chainEndpoint);
+
 const caver = new Caver(chainEndpoint);
 
 const HAECHI_KEY =
-  '0x52516c2b22a19f8cfaa918b9d33e5c7682d212c831e22b1f2c2336f7186dcf9e'; // 0x80ea9a01043e6575f259e87eefe15db33f69b713
+  '0x75f233d254dd6d2f73dce771f57522c2549a89e5c06321c570b4a521f75c7448'; // 0x80ea9a01043e6575f259e87eefe15db33f69b713
 const haechiAccount = {
   address: caver.klay.accounts.privateKeyToAccount(HAECHI_KEY).address,
   secretKey: HAECHI_KEY,
@@ -37,28 +35,24 @@ async function sendTransaction(account, txOption) {
 main();
 
 async function main() {
-  let receipt = await sendTransaction(haechiAccount, {
-    data: masterWalletInfo.bytecode,
-  });
-  const masterWalletTemplate = receipt.contractAddress;
-  console.log('Master Wallet Template Address: ' + masterWalletTemplate);
-  receipt = await sendTransaction(haechiAccount, {
-    data: userWalletInfo.bytecode,
-  });
-  const userWalletTemplate = receipt.contractAddress;
-  console.log('User Wallet Template Address: ' + userWalletTemplate);
-  receipt = await sendTransaction(haechiAccount, {
-    data: registryInfo.bytecode,
-  });
-  const registryTemplate = receipt.contractAddress;
-  console.log('Registry Template Address: ' + registryTemplate);
+  const TOKEN_ADDR = "0x08a9D7eF3447335210B392d80A8E12A7ec8F8d8E";
+  const QUEST_ADDR = "0x870FCeB0418E5E7f9a096546c76bb62F8c91B5bB";
+  const SAVEBOX_ADDR = "0xc6cda41844D38297b4d94d2b88352863c59b7ae6";
 
-  const deployData = (new caver.klay.Contract(walletFactoryInfo.abi)).deploy({
-    data: walletFactoryInfo.bytecode,
-    arguments: [registryTemplate, masterWalletTemplate, userWalletTemplate]
-  }).encodeABI();
-  receipt = await sendTransaction(haechiAccount, {
-    data: deployData,
-  });
-  console.log('Factory Address: ' + receipt.contractAddress);
+  const USER1_ADDR = "0x1119D7eF3447335210B392d80A8E12A7ec8F8111";
+
+  const quest = new caver.klay.Contract(QuestInfo.abi, QUEST_ADDR);
+  const data = await quest.methods.questInfo('0xaaa').call();
+  console.log(data);
+  // let receipt = await sendTransaction(haechiAccount, {
+  //   data: masterWalletInfo.bytecode,
+  // });
+  // const masterWalletTemplate = receipt.contractAddress;
+
+  // const data = await token.methods.balanceOf(haechiAccount.address).call();
+  // console.log(data);
+  // const result = await sendTransaction(haechiAccount, {
+  //   data,
+  // });
+  // console.log(result);
 }
