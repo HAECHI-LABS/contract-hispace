@@ -11,16 +11,28 @@ const address = {
   quest : "0x25dA4faFB42c9a8D853D50A8Dde5353fA8bFC45D",
 };
 
-const questId = "0x82c6e55bd7276a78ee13af33bb0486842d381e4964b398d82eb577c50ec503d0";
+// const questId = "0x82c6e55bd7276a78ee13af33bb0486842d381e4964b398d82eb577c50ec503d0";
 
 caver.klay.accounts.wallet.add(priv);
 console.log(caver.klay.accounts.wallet);
 const token = new caver.klay.Contract(Token, address.token);
 const quest = new caver.klay.Contract(HiQuest, address.quest);
 const questId = caver.utils.randomHex(32);
+console.log(questId);
+
 async function create() {
-  const receipt = await quest.methods.create(questId, 0, 10000000000, 100).send({from:"0x5399850AB7BFE194FA1594F8051329CcC8aCfd56", gas: 8000000});
+  const receipt = await quest.methods.create(questId, 0, 20000000000, 200)
+    .send({
+      from:"0x5399850AB7BFE194FA1594F8051329CcC8aCfd56",
+      gas: 8000000
+    });
   console.log(receipt);
 }
 
-create();
+async function find(questId) {
+  const q = await quest.methods.questInfo(questId).call();
+  console.log(q);
+}
+
+// create();
+find('0x1bc55dae5f8b8a7a3b2ceb9811643d5f0db0d2fc12a748967ea01358ff5d8afd');
