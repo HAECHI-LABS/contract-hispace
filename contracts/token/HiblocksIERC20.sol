@@ -60,4 +60,9 @@ interface HiblocksIERC20 {
      */
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
 
+    /**
+     * @dev Check for administrator privileges.
+     */
+    function isWhitelistAdmin(address sender) external view returns (bool);
+
 }

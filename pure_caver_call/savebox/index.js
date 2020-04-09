@@ -46,6 +46,12 @@ async function stakeTo(who, amount, boxId) {
   logging(receipt, 'stakeTo');
 }
 
+async function stakeAmount(boxId, staker) {
+  const result = await savebox.methods.stakeAmount(boxId, staker).call();
+  console.log(result);
+  logging(result, 'stakeAmount');
+}
+
 if (process.argv.length < 3) {
   throw new Error('command must be given');
 }
@@ -77,6 +83,15 @@ switch (cmd) {
       throw new Error('stakeTo boxId  must be specified');
     }
     return stakeTo(process.argv[3], process.argv[4], process.argv[5]);
+
+  case 'stakeAmount':
+    if (!process.argv[3]) {
+      throw new Error('stakeAmount boxId must be specified');
+    }
+    if (!process.argv[4]) {
+      throw new Error('stakeAmount staker must be specified');
+    }
+    return stakeAmount(process.argv[3], process.argv[4]);
   default:
     throw new Error('invalid command: ' + cmd);
 }

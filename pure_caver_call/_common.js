@@ -8,7 +8,7 @@ const eoa = {
   rob: '0x8668103a0091c00b29310cc98112415e5e42c1e8',
   rob2: '0xc54dda7182474f2b59a575124024d99c20e346d4',
   walletKey: '0x673d403b89d488bada09f707abcb6b78f5dd3d03',
-  bob: '0xd364285989991be84b1c3c9ce4b53e8e83c3f093',
+  bob: '0x34c8bc8986307936bb4ecd151bc98b6645ab36ff',
 };
 
 const priv = {
@@ -20,6 +20,11 @@ const priv = {
 const contract = {
   token: '0x0e6984E470BcC67c9C008F921DCb44a7B252f298',
   savebox: '0x30158fE5f72Af67e58982AfB75b943a33b45F03C',
+  rewardpool: '0xd90C77D5a64aA3e8cDE799cF27323D0Dc9A6b82C',
+};
+
+const savebox = {
+  '1': '0x09884e57ffa8b5c27cb7a956feee1a43ce4fe325b7d14f73613c30c016212cc7',
 };
 
 module.exports.eoa = eoa;

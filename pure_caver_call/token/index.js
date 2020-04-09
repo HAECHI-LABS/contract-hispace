@@ -17,7 +17,7 @@ if (process.argv.length < 3) {
 }
 
 async function approve(from, who) {
-  const receipt = await token.methods.approve(who, 100).send({
+  const receipt = await token.methods.approve(who, 100000).send({
     from: from,
     gas: 8000000
   });
@@ -39,7 +39,7 @@ async function transferFrom(to) {
 }
 
 async function transfer(to) {
-  const receipt = await token.methods.transfer(to, 1000).send({
+  const receipt = await token.methods.transfer(to, 100).send({
     from: eoa.taek,
     gas: 8000000
   });
