@@ -15,7 +15,8 @@ module.exports = (deployer, network, accounts) => {
   let pool;
   deployer.then( async ()=>{
     if(network == 'testnet'){
-      token = await deployer.deploy(Token,"Hiblocks","HIBS",18, 1000000000000);
+      console.log("Using testnet... Token Contract Address :0xB1CA09Fa5A1f6C7f425421c3c2cc8F8F1F13f4b9");
+      token = await Token.at('0xB1CA09Fa5A1f6C7f425421c3c2cc8F8F1F13f4b9');
     }
     else if(network == 'mainnet'){
       console.log("Using mainnet... Token Contract Address :0xE06b40df899b9717b4E6B50711E1dc72d08184cF");
