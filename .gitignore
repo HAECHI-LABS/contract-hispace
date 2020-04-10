@@ -10,3 +10,4 @@
 **/.coverage_artifacts
 **/.DS_Store
 .idea/
+migrationResults.json

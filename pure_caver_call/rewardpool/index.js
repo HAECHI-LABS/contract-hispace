@@ -6,7 +6,7 @@ const priv = require('../_common').priv;
 const contract = require('../_common').contract;
 const logging = require('../_common').logging;
 
-const RewardPool = require('../RewardPool.json').abi;
+const RewardPool = require('../../build/contracts/RewardPool.json').abi;
 
 caver.klay.accounts.wallet.add(priv.taek);
 

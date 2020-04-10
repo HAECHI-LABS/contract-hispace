@@ -5,7 +5,7 @@ const logging = require('../_common').logging;
 const Caver = require('caver-js');
 const caver = new Caver('https://api.baobab.klaytn.net:8651/');
 
-const Token = require('../hiblocks.json').abi;
+const Token = require('../../build/contracts/HiblocksToken.json').abi;
 
 caver.klay.accounts.wallet.add(priv.taek);
 caver.klay.accounts.wallet.add(priv.jh);

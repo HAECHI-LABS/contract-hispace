@@ -28,7 +28,8 @@ module.exports = (deployer, network, accounts) => {
     await token.approve(quest.address, -1);
     const receipt = await quest.create(web3.utils.randomHex(32), 0, 10000000000, 100);
     //represents quest creation
-    console.log(receipt.logs[0].args);
+    quest.questId = receipt.logs[0].args.questId;
+    console.log(quest.questId);
   }).then(async () => {
     savebox = await deployer.deploy(SaveBox, token.address);
     //test create savebox
@@ -36,7 +37,8 @@ module.exports = (deployer, network, accounts) => {
     await token.approve(savebox.address, -1);
     const receipt = await savebox.createBox();
     //represents savebox creation
-    console.log(receipt.logs[0].args);
+    savebox.boxId = receipt.logs[0].args.boxId;
+    console.log(savebox.boxId);
   }).then(async ()=>{
     //deploy HispaceActivity
     activity = await deployer.deploy(Activity);
@@ -46,5 +48,17 @@ module.exports = (deployer, network, accounts) => {
     //deploy RewardSupplier
     supplier = await deployer.deploy(RewardSupplier,token.address,accounts[0],1000, 1586498400);
     await token.transfer(supplier.address, 1000, {from:accounts[0]});
+  }).then(async ()=>{
+    let addresses = {
+      token: token.address,
+      quest: quest.address,
+      savebox: savebox.address,
+      activity: activity.address,
+      pool: pool.address,
+      supplier: supplier.address,
+      questId: quest.questId,
+      boxId: savebox.boxId,
+    };
+    fs.writeFileSync(__dirname + '/../migrationResults.json', JSON.stringify(addresses,null,2));
   });
 };

@@ -1,7 +1,7 @@
 const Caver = require('caver-js');
 const caver = new Caver('https://api.baobab.klaytn.net:8651/');
 
-const Activity = require('./HispaceActivity.json').abi;
+const Activity = require('../build/contracts/HispaceActivity.json').abi;
 
 // const priv = "0x879c00447f38af4d72b2ac870b16fe62b54566d210e1dfa52449f2f90f0e0dc6"; // taek
 const priv = "0x6f993629f0d3836153141053f314286d555b4ac21f14057004c7e900413aa1a3"; // jh

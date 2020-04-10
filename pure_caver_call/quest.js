@@ -1,8 +1,8 @@
 const Caver = require('caver-js');
 const caver = new Caver('https://api.baobab.klaytn.net:8651/');
 
-const Token = require('./hiblocks.json').abi;
-const HiQuest = require('./hiquest.json').abi;
+const Token = require('../build/contracts/HiblocksToken.json').abi;
+const HiQuest = require('../build/contract/HiQuest.json').abi;
 
 const priv = "0x879c00447f38af4d72b2ac870b16fe62b54566d210e1dfa52449f2f90f0e0dc6";
 

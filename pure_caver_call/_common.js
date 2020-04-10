@@ -1,5 +1,6 @@
 const fs = require('fs');
 const moment = require('moment');
+const contract = require('../migrationResults.json');
 
 const eoa = {
   taek: '0x5399850AB7BFE194FA1594F8051329CcC8aCfd56',
@@ -15,16 +16,6 @@ const priv = {
   taek: '0x879c00447f38af4d72b2ac870b16fe62b54566d210e1dfa52449f2f90f0e0dc6',
   jh: '0x6f993629f0d3836153141053f314286d555b4ac21f14057004c7e900413aa1a3',
   jh2: '0x4e14bc6830f930daa8cefef30e60f86971265724dec969fd071a68929d5ae7a8'
-};
-
-const contract = {
-  token: '0x0e6984E470BcC67c9C008F921DCb44a7B252f298',
-  savebox: '0x30158fE5f72Af67e58982AfB75b943a33b45F03C',
-  rewardpool: '0xd90C77D5a64aA3e8cDE799cF27323D0Dc9A6b82C',
-};
-
-const savebox = {
-  '1': '0x09884e57ffa8b5c27cb7a956feee1a43ce4fe325b7d14f73613c30c016212cc7',
 };
 
 module.exports.eoa = eoa;
