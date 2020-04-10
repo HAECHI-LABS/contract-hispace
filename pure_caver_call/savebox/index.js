@@ -1,21 +1,19 @@
-const eoa = require('../_common').eoa;
 const contract = require('../_common').contract;
-const priv = require('../_common').priv;
 const logging = require('../_common').logging;
+const addPrivateKeys = require('../_common').addPrivateKeys;
 const Caver = require('caver-js');
 const caver = new Caver('https://api.baobab.klaytn.net:8651/');
 
 const Savebox = require('../../build/contracts/SaveBox.json').abi;
 
-caver.klay.accounts.wallet.add(priv.taek);
-caver.klay.accounts.wallet.add(priv.jh);
-caver.klay.accounts.wallet.add(priv.jh2);
 const savebox = new caver.klay.Contract(Savebox, contract.savebox);
+addPrivateKeys(caver.klay.accounts.wallet);
+const addresses = caver.klay.accounts.wallet;
 
 async function createBox() {
   const receipt = await savebox.methods.createBox()
     .send({
-      from: eoa.taek,
+      from: addresses[0].address,
       gas: 8000000
     });
   console.log(receipt);

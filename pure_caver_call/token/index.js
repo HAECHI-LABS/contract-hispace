@@ -1,15 +1,13 @@
-const eoa = require('../_common').eoa;
 const contract = require('../_common').contract;
-const priv = require('../_common').priv;
 const logging = require('../_common').logging;
+const addPrivateKeys = require('../_common').addPrivateKeys;
 const Caver = require('caver-js');
 const caver = new Caver('https://api.baobab.klaytn.net:8651/');
 
+addPrivateKeys(caver.klay.accounts.wallet);
+
 const Token = require('../../build/contracts/HiblocksToken.json').abi;
 
-caver.klay.accounts.wallet.add(priv.taek);
-caver.klay.accounts.wallet.add(priv.jh);
-caver.klay.accounts.wallet.add(priv.jh2);
 const token = new caver.klay.Contract(Token, contract.token);
 
 if (process.argv.length < 3) {
@@ -27,11 +25,11 @@ async function approve(from, who) {
 
 async function transferFrom(to) {
   const receipt = await token.methods.transferFrom(
-    eoa.taek,
+    addresses[0].address,
     to,
     10
   ).send({
-    from: eoa.jh,
+    from: addresses[1].address,
     gas: 8000000
   });
   console.log(receipt);
@@ -40,7 +38,7 @@ async function transferFrom(to) {
 
 async function transfer(to) {
   const receipt = await token.methods.transfer(to, 100).send({
-    from: eoa.taek,
+    from: addresses[0].address,
     gas: 8000000
   });
   console.log(receipt);

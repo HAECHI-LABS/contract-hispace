@@ -22,7 +22,6 @@ module.exports = {
         gasPrice: null
     }
   },
-
   compilers: {
     solc: {
       version: '0.5.6', // 0.4.26, 0.5.11, 0.6.2
@@ -34,4 +33,9 @@ module.exports = {
       },
     },
   },
+  privateKeys: [
+    privateKey,
+    '0x6f993629f0d3836153141053f314286d555b4ac21f14057004c7e900413aa1a3',
+    '0x4e14bc6830f930daa8cefef30e60f86971265724dec969fd071a68929d5ae7a8',
+  ]
 };
