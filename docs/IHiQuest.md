@@ -1,9 +1,20 @@
 # <span id="IHiQuest"></span> IHiQuest
-> 
+> 👤 taek lee &lt;taeklee@haechi.io>
+
+```
+Quest Control Smart Contract for HiQuest
+```
 
 
 
+### 📋 Notice
 
+Create/Join/Reward/Close/WithDraw
+
+
+### 🔎 Details
+
+should enforce manager to approve(-1) of hiblockstoken
 
 ## Contents
 
@@ -226,7 +237,7 @@ success : return true if succeeded
 <dt> <h3> reward(bytes32,address,uint256) <a name="IHiQuest--function--reward(bytes32,address,uint256)"></a> </h3> </dt>
 <dd>
 
->rewards `_amount` of HiBlocks token to `_to` for joining `_questId` quest 
+>rewards `_amount` of HiBlocks token to `_to` for joining `_questId` quest
 
 🔨`onlyManager` |  👀 `nonpayable`
 
@@ -251,7 +262,7 @@ success : return true if succeeded
 <dt> <h3> close(bytes32) <a name="IHiQuest--function--close(bytes32)"></a> </h3> </dt>
 <dd>
 
->close `_questId` quest 
+>close `_questId` quest
 
 🔨`onlyManager` |  👀 `nonpayable`
 
