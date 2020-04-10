@@ -1,6 +1,6 @@
 pragma solidity ^0.5.6;
 
-import "./token/HiblocksIERC20.sol";
+import "../token/HiblocksIERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
 contract RewardSupplier {

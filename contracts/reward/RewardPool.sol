@@ -1,6 +1,6 @@
 pragma solidity ^0.5.6;
 
-import "./HiBlocksTokenFlattened.sol";
+import "../token/HiBlocksTokenFlattened.sol";
 
 contract RewardPool {
     using SafeMath for uint256;
