@@ -29,6 +29,7 @@ contract SaveBox is ISaveBox {
         Box storage box = _box[_boxId];
         box.creator = msg.sender;
         box.createdAt = now;
+        _nonce[msg.sender]++;
         emit BoxCreated(_boxId, msg.sender);
     }
 
@@ -39,11 +40,11 @@ contract SaveBox is ISaveBox {
         return _stakeTo(_boxId, _amount);
     }
 
-    function unstakeFrom(bytes32 _boxId) external returns (bool) {
+    function unstakeFrom(bytes32 _boxId, uint256 _amount) external returns (bool) {
         Box memory box = _box[_boxId];
         require(box.creator != address(0), "UnstakeFrom/Box does not exist");
         require(!box.destroyed, "UnstakeFrom/Box is destroyed");
-        return _unstake(_boxId);
+        return _unstake(_boxId, _amount);
     }
 
     function destroyBox(bytes32 _boxId) external returns (bool) {
@@ -59,8 +60,8 @@ contract SaveBox is ISaveBox {
         return _stakeTo(bytes32(0), _amount);
     }
 
-    function unstake() external returns (bool) {
-        return _unstake(bytes32(0));
+    function unstake(uint256 _amount) external returns (bool) {
+        return _unstake(bytes32(0), _amount);
     }
 
     function boxId(address _creator, uint256 _salt) external view returns (bytes32) {
@@ -88,12 +89,12 @@ contract SaveBox is ISaveBox {
         return true;
     }
 
-    function _unstake(bytes32 _boxId) internal returns (bool) {
+    function _unstake(bytes32 _boxId, uint256 _amount) internal returns (bool) {
+        require(_amount <= _stake[_boxId][msg.sender], "Unstake/Can't unstake more than stake amount");
         Box storage box = _box[_boxId];
-        uint256 amount = _stake[_boxId][msg.sender];
-        box.balance = box.balance - amount;
-        _stake[_boxId][msg.sender] = 0;
-        _token.transfer(msg.sender, amount);
-        emit Unstake(_boxId, msg.sender, amount);
+        box.balance = box.balance - _amount;
+        _stake[_boxId][msg.sender] = _stake[_boxId][msg.sender] - _amount;
+        _token.transfer(msg.sender, _amount);
+        emit Unstake(_boxId, msg.sender, _amount);
     }
 }

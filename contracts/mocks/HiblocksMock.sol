@@ -52,4 +52,8 @@ contract HiblocksMock is HiblocksIERC20 {
     locked = 3;
     staked = 4;
   }
+
+  function isWhitelistAdmin(address _sender) external view returns(bool) {
+      return true;
+  }
 }

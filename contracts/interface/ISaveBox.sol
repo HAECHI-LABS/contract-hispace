@@ -45,8 +45,9 @@ interface ISaveBox {
     /// @notice unstake from `_boxId` box
     /// @dev _boxId cannot be bytes32(0) it is assigned to individual staking
     /// @param _boxId id of unstaking box
+    /// @param _amount amount to unstake
     /// @return success true if succeeded
-    function unstakeFrom(bytes32 _boxId) external returns (bool);
+    function unstakeFrom(bytes32 _boxId, uint256 _amount) external returns (bool);
 
     /// @notice destroy `_boxId` box
     /// @dev cannot destroy if there is stake left
@@ -60,8 +61,9 @@ interface ISaveBox {
     function stake(uint256 _amount) external returns (bool);
 
     /// @notice unstake all token staked as individual staking
+    /// @param _amount amount to unstake
     /// @return success true if succeeded
-    function unstake() external returns (bool);
+    function unstake(uint256 _amount) external returns (bool);
 
     /// @notice get boxId using creator address and nonce
     /// @param _creator creator address

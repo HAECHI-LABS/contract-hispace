@@ -59,7 +59,7 @@ contract('SaveBox', (account) =>  {
     });
 
     it('should fail if msg.sender is not creator', async ()=>{
-      await saveBox.unstakeFrom(boxId, {from:staker});
+      await saveBox.unstakeFrom(boxId, amount, {from:staker});
       await expectRevert(saveBox.destroyBox(boxId, {from:staker}), "Destroy/Only creator can destroy box");
     });
 
@@ -70,7 +70,7 @@ contract('SaveBox', (account) =>  {
     describe('when destroy succeeded', ()=>{
       let receipt;
       beforeEach(async()=>{
-        await saveBox.unstakeFrom(boxId, {from:staker});
+        await saveBox.unstakeFrom(boxId, amount, {from:staker});
         receipt = await saveBox.destroyBox(boxId, {from:creator});
       });
 
@@ -137,6 +137,7 @@ contract('SaveBox', (account) =>  {
   describe('#unstakeFrom()', ()=>{
     let boxId;
     const amount = new BN('100');
+    const unstakeAmount = new BN('20');
     beforeEach(async ()=>{
       const receipt = await saveBox.createBox({from:creator});
       boxId = utils.getEventArgs(receipt, 'BoxCreated').boxId;
@@ -146,36 +147,40 @@ contract('SaveBox', (account) =>  {
     });
 
     it('should fail if box is not created yet', async ()=>{
-      await expectRevert(saveBox.unstakeFrom(web3.utils.randomHex(32), {from:staker}),"UnstakeFrom/Box does not exist");
+      await expectRevert(saveBox.unstakeFrom(web3.utils.randomHex(32), unstakeAmount, {from:staker}),"UnstakeFrom/Box does not exist");
+    });
+
+    it('should fail if unstakeAmount is larger than stake amount', async ()=>{
+      await expectRevert(saveBox.unstakeFrom(boxId, amount.addn(1), {from:staker}), "Unstake/Can't unstake more than stake amount");
     });
 
     it('should fail if box is already destroyed', async ()=>{
-      await saveBox.unstakeFrom(boxId, {from:staker});
+      await saveBox.unstakeFrom(boxId, amount, {from:staker});
       await saveBox.destroyBox(boxId, {from:creator});
-      await expectRevert(saveBox.unstakeFrom(boxId, {from:staker}), "UnstakeFrom/Box is destroyed");
+      await expectRevert(saveBox.unstakeFrom(boxId, unstakeAmount, {from:staker}), "UnstakeFrom/Box is destroyed");
     });
 
     describe('when unstake succeeded', ()=>{
       let receipt;
       let box;
       beforeEach(async ()=>{
-        receipt = await saveBox.unstakeFrom(boxId, {from:staker});
+        receipt = await saveBox.unstakeFrom(boxId, unstakeAmount, {from:staker});
         box = await saveBox.boxInfo(boxId);
       });
 
       it('should decrease box balance', async ()=>{
-        expect(box.balance).to.be.bignumber.equal(new BN(0));
+        expect(box.balance).to.be.bignumber.equal(amount.sub(unstakeAmount));
       });
 
       it('should set stake amount to zero', async ()=>{
-        expect(await saveBox.stakeAmount(boxId, staker)).to.be.bignumber.equal(new BN(0));
+        expect(await saveBox.stakeAmount(boxId, staker)).to.be.bignumber.equal(amount.sub(unstakeAmount));
       });
 
       it('should emit Unstake event', async ()=>{
         expectEvent(receipt, 'Unstake', {
           boxId: boxId,
           staker: staker,
-          amount: amount
+          amount: unstakeAmount
         });
       });
     });
@@ -228,27 +233,32 @@ contract('SaveBox', (account) =>  {
       await saveBox.stake( amount, {from:staker});
     });
 
+    it('should fail if unstakeAmount is larger than stake amount', async ()=>{
+      await expectRevert(saveBox.unstake(amount.addn(1), {from:staker}), "Unstake/Can't unstake more than stake amount");
+    });
+
     describe('when unstake succeeded', ()=>{
       let receipt;
       let box;
+      const unstakeAmount = new BN('20');
       beforeEach(async ()=>{
-        receipt = await saveBox.unstake( {from:staker});
+        receipt = await saveBox.unstake( unstakeAmount, {from:staker});
         box = await saveBox.boxInfo(boxId);
       });
 
       it('should decrease box balance', async ()=>{
-        expect(box.balance).to.be.bignumber.equal(new BN(0));
+        expect(box.balance).to.be.bignumber.equal(amount.sub(unstakeAmount));
       });
 
       it('should set stake amount to zero', async ()=>{
-        expect(await saveBox.stakeAmount(boxId, staker)).to.be.bignumber.equal(new BN(0));
+        expect(await saveBox.stakeAmount(boxId, staker)).to.be.bignumber.equal(amount.sub(unstakeAmount));
       });
 
       it('should emit Unstake event', async ()=>{
         expectEvent(receipt, 'Unstake', {
           boxId: boxId,
           staker: staker,
-          amount: amount
+          amount: unstakeAmount
         });
       });
     });
