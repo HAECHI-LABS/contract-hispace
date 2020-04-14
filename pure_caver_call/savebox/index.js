@@ -10,10 +10,10 @@ const savebox = new caver.klay.Contract(Savebox, contract.savebox);
 addPrivateKeys(caver.klay.accounts.wallet);
 const addresses = caver.klay.accounts.wallet;
 
-async function createBox() {
+async function createBox(creator) {
   const receipt = await savebox.methods.createBox()
     .send({
-      from: addresses[0].address,
+      from: creator,
       gas: 8000000
     });
   console.log(receipt);
@@ -59,7 +59,10 @@ console.log(process.argv);
 console.log('executing ' + cmd + '...');
 switch (cmd) {
   case 'createBox':
-    return createBox();
+    if (!process.argv[3]) {
+      throw new Error('createBox creator must be specified');
+    }
+    return createBox(process.argv[3]);
 
   case 'stake':
     if (!process.argv[3]) {
