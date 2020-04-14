@@ -1,13 +1,16 @@
 const Caver = require('caver-js');
 const caver = new Caver('https://api.baobab.klaytn.net:8651/');
 
+const eoa = require('../_common').eoa;
+const priv = require('../_common').priv;
 const contract = require('../_common').contract;
 const logging = require('../_common').logging;
-const addPrivateKeys = require('../_common').addPrivateKeys;
 
-const RewardPool = require('../../build/contracts/RewardPool.json').abi;
-const rewardPool = new caver.klay.Contract(RewardPool, contract.pool);
-addPrivateKeys(caver.klay.accounts.wallet);
+const RewardPool = require('../RewardPool.json').abi;
+
+caver.klay.accounts.wallet.add(priv.taek);
+
+const rewardPool = new caver.klay.Contract(RewardPool, contract.rewardpool);
 
 async function rewardBalance() {
   const result = await rewardPool.methods.rewardBalance().call();

@@ -1,14 +1,16 @@
+const eoa = require('../_common').eoa;
 const contract = require('../_common').contract;
+const priv = require('../_common').priv;
 const logging = require('../_common').logging;
-const addPrivateKeys = require('../_common').addPrivateKeys;
 const Caver = require('caver-js');
 const caver = new Caver('https://api.baobab.klaytn.net:8651/');
 
-const Savebox = require('../../build/contracts/SaveBox.json').abi;
+const Savebox = require('../SaveBox.json').abi;
 
+caver.klay.accounts.wallet.add(priv.taek);
+caver.klay.accounts.wallet.add(priv.jh);
+caver.klay.accounts.wallet.add(priv.jh2);
 const savebox = new caver.klay.Contract(Savebox, contract.savebox);
-addPrivateKeys(caver.klay.accounts.wallet);
-const addresses = caver.klay.accounts.wallet;
 
 async function createBox(creator) {
   const receipt = await savebox.methods.createBox()
@@ -44,7 +46,7 @@ async function stakeTo(who, amount, boxId) {
   logging(receipt, 'stakeTo');
 }
 
-async function stakeAmount(boxId, staker) {
+async function stakeAmount(staker, boxId) {
   const result = await savebox.methods.stakeAmount(boxId, staker).call();
   console.log(result);
   logging(result, 'stakeAmount');
@@ -87,12 +89,14 @@ switch (cmd) {
 
   case 'stakeAmount':
     if (!process.argv[3]) {
-      throw new Error('stakeAmount boxId must be specified');
-    }
-    if (!process.argv[4]) {
       throw new Error('stakeAmount staker must be specified');
     }
-    return stakeAmount(process.argv[3], process.argv[4]);
+    let boxId = process.argv[4];
+    if (!process.argv[4]) {
+      console.log('boxId not specified, set to zero');
+      boxId = '0x0000000000000000000000000000000000000000000000000000000000000000';
+    }
+    return stakeAmount(process.argv[3], boxId);
   default:
     throw new Error('invalid command: ' + cmd);
 }
