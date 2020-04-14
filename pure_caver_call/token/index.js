@@ -1,35 +1,46 @@
+const eoa = require('../_common').eoa;
 const contract = require('../_common').contract;
+const priv = require('../_common').priv;
 const logging = require('../_common').logging;
-const addPrivateKeys = require('../_common').addPrivateKeys;
 const Caver = require('caver-js');
 const caver = new Caver('https://api.baobab.klaytn.net:8651/');
+const utils = require('web3').utils;
+const Token = require('../../build/contracts/HiblocksToken').abi;
 
-addPrivateKeys(caver.klay.accounts.wallet);
-
-const Token = require('../../build/contracts/HiblocksToken.json').abi;
-
+caver.klay.accounts.wallet.add(priv.taek);
+caver.klay.accounts.wallet.add(priv.jh);
+caver.klay.accounts.wallet.add(priv.jh2);
 const token = new caver.klay.Contract(Token, contract.token);
+
+// Decimal
+const decimals = utils.toBN(18);
+
+// Amount of token
+const tokenAmount = utils.toBN(10000000000);
+
+// Amount as Hex - contract.methods.transfer(toAddress, tokenAmountHex).encodeABI();
+const tokenAmountHex = '0x' + tokenAmount.mul(utils.toBN(10).pow(decimals)).toString('hex');
 
 if (process.argv.length < 3) {
   throw new Error('command must be given');
 }
 
 async function approve(from, who) {
-  const receipt = await token.methods.approve(who, 100000).send({
+  const receipt = await token.methods.approve(who, tokenAmountHex).send({
     from: from,
     gas: 8000000
   });
   console.log(receipt);
-  logging(receipt, 'approve');
+  // logging(receipt, 'approve');
 }
 
 async function transferFrom(to) {
   const receipt = await token.methods.transferFrom(
-    addresses[0].address,
+    eoa.taek,
     to,
     10
   ).send({
-    from: addresses[1].address,
+    from: eoa.jh,
     gas: 8000000
   });
   console.log(receipt);
@@ -37,12 +48,12 @@ async function transferFrom(to) {
 }
 
 async function transfer(to) {
-  const receipt = await token.methods.transfer(to, 100).send({
-    from: addresses[0].address,
+  const receipt = await token.methods.transfer(to, tokenAmountHex).send({
+    from: eoa.taek,
     gas: 8000000
   });
   console.log(receipt);
-  logging(receipt, 'transfer');
+  // logging(receipt, 'transfer');
 }
 
 async function balanceOf(who) {
