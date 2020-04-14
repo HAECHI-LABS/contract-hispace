@@ -17,8 +17,8 @@ module.exports = (deployer, network, accounts) => {
   else{
   deployer.then( async ()=>{
     if(network == 'testnet'){
-      console.log("Using testnet... Token Contract Address :0xB1CA09Fa5A1f6C7f425421c3c2cc8F8F1F13f4b9");
-      token = await Token.at('0xB1CA09Fa5A1f6C7f425421c3c2cc8F8F1F13f4b9');
+      console.log("Using testnet... Token Contract Address :0x0e6984E470BcC67c9C008F921DCb44a7B252f298 ");
+      token = await Token.at('0x0e6984E470BcC67c9C008F921DCb44a7B252f298');
     }
     else if(network == 'mainnet'){
       console.log("Using mainnet... Token Contract Address :0xE06b40df899b9717b4E6B50711E1dc72d08184cF");
@@ -40,7 +40,7 @@ module.exports = (deployer, network, accounts) => {
     //test create savebox
     //needs token approved to quest
     await token.approve(savebox.address, -1);
-    const receipt = await savebox.createBox();
+    const receipt = await savebox.createBox(web3.utils.randomHex(32));
     //represents savebox creation
     savebox.boxId = receipt.logs[0].args.boxId;
     console.log(savebox.boxId);

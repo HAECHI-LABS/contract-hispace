@@ -14,8 +14,6 @@ contract SaveBox is ISaveBox {
 
     HiblocksIERC20 internal _token;
 
-    mapping(address => uint256) _nonce;
-
     mapping(bytes32 => Box) _box;
     mapping(bytes32 => mapping(address=>uint256)) _stake;
 
@@ -24,13 +22,14 @@ contract SaveBox is ISaveBox {
         _token = HiblocksIERC20(_tokenAddr);
     }
 
-    function createBox() external returns (bytes32 _boxId) {
-        _boxId = keccak256(abi.encodePacked(msg.sender, _nonce[msg.sender]));
+    function createBox(bytes32 _boxId) external returns (bool success) {
+        require(_boxId != bytes32(0), "Create/Cannot create 0 boxId");
         Box storage box = _box[_boxId];
+        require(box.creator == address(0), "Create/Box Id already exist");
         box.creator = msg.sender;
         box.createdAt = now;
-        _nonce[msg.sender]++;
         emit BoxCreated(_boxId, msg.sender);
+        return true;
     }
 
     function stakeTo(bytes32 _boxId, uint256 _amount) external returns (bool) {
@@ -62,10 +61,6 @@ contract SaveBox is ISaveBox {
 
     function unstake(uint256 _amount) external returns (bool) {
         return _unstake(bytes32(0), _amount);
-    }
-
-    function boxId(address _creator, uint256 _salt) external view returns (bytes32) {
-        return keccak256(abi.encodePacked(_creator, _salt));
     }
 
     function stakeAmount(bytes32 _boxId, address _staker) external view returns (uint256) {

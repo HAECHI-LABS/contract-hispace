@@ -8,6 +8,11 @@ const ERC20 = artifacts.require('HiblocksMock');
 const utils = require('./utils');
 let saveBox;
 let token;
+
+function randomHex() {
+  return web3.utils.randomHex(32);
+}
+
 contract('SaveBox', (account) =>  {
   const [deployer, creator, staker, ...others] = account;
   beforeEach(async ()=>{
@@ -25,19 +30,22 @@ contract('SaveBox', (account) =>  {
     let receipt;
     let boxId;
     beforeEach(async ()=>{
-      receipt = await saveBox.createBox({from:creator});
+      receipt = await saveBox.createBox(randomHex(), {from:creator});
       boxId = utils.getEventArgs(receipt, 'BoxCreated').boxId;
+    });
+
+    it('should fail if _boxId is zero', async ()=>{
+      await expectRevert(saveBox.createBox(web3.utils.toHex(0), {from:creator}), "Create/Cannot create 0 boxId");
+    });
+
+    it('should fail if _boxId is zero', async ()=>{
+      await expectRevert(saveBox.createBox(boxId, {from:creator}), "Create/Box Id already exist");
     });
 
     it('should set creator as msg.sender', async ()=>{
       const box = await saveBox.boxInfo(boxId);
       expect(box.creator).to.be.equal(creator);
     });
-
-    it('should create box with appropriate boxId', async ()=>{
-      expect(await saveBox.boxId(creator, 0)).to.be.equal(boxId);
-    });
-
 
     it('should emit BoxCreated event', async ()=>{
       expectEvent(receipt, 'BoxCreated', {
@@ -51,7 +59,7 @@ contract('SaveBox', (account) =>  {
     let boxId;
     const amount = new BN('100');
     beforeEach(async ()=>{
-      const receipt = await saveBox.createBox({from:creator});
+      const receipt = await saveBox.createBox(randomHex(), {from:creator});
       boxId = utils.getEventArgs(receipt, 'BoxCreated').boxId;
       await token.transfer(staker, amount, {from:deployer});
       await token.approve(saveBox.address, amount, {from:staker});
@@ -90,7 +98,7 @@ contract('SaveBox', (account) =>  {
     let boxId;
     const amount = new BN('100');
     beforeEach(async ()=>{
-      const receipt = await saveBox.createBox({from:creator});
+      const receipt = await saveBox.createBox(randomHex(), {from:creator});
       boxId = utils.getEventArgs(receipt, 'BoxCreated').boxId;
       await token.transfer(staker, amount.mul(new BN(2)), {from:deployer});
       await token.approve(saveBox.address, amount, {from:staker});
@@ -139,7 +147,7 @@ contract('SaveBox', (account) =>  {
     const amount = new BN('100');
     const unstakeAmount = new BN('20');
     beforeEach(async ()=>{
-      const receipt = await saveBox.createBox({from:creator});
+      const receipt = await saveBox.createBox(randomHex(), {from:creator});
       boxId = utils.getEventArgs(receipt, 'BoxCreated').boxId;
       await token.transfer(staker, amount.mul(new BN(2)), {from:deployer});
       await token.approve(saveBox.address, amount, {from:staker});
@@ -227,7 +235,7 @@ contract('SaveBox', (account) =>  {
     let boxId = web3.utils.padLeft(0x00, 64);
     const amount = new BN('100');
     beforeEach(async ()=>{
-      const receipt = await saveBox.createBox({from:creator});
+      const receipt = await saveBox.createBox(randomHex(), {from:creator});
       await token.transfer(staker, amount.mul(new BN(2)), {from:deployer});
       await token.approve(saveBox.address, amount, {from:staker});
       await saveBox.stake( amount, {from:staker});
