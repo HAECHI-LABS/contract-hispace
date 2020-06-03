@@ -47,7 +47,6 @@
     "eslint-plugin-import": "^2.18.2",
     "leafleth": "https://github.com/leekt216/leafleth",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
     "truffle-hdwallet-provider-klaytn": "^1.0.13-a"
   }
 }
