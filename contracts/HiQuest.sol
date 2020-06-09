@@ -2,8 +2,9 @@ pragma solidity 0.5.6;
 
 import "./interface/IHiQuest.sol";
 import "./token/HiblocksIERC20.sol";
+import "./Ownable.sol";
 
-contract HiQuest is IHiQuest {
+contract HiQuest is IHiQuest, Ownable {
   struct Quest{
     address manager;
     uint256 open;
@@ -21,9 +22,9 @@ contract HiQuest is IHiQuest {
   mapping (bytes32 => mapping(address => bool)) internal _joined;
   mapping (bytes32 => mapping(address => bytes)) internal _joinDesc;
   mapping (bytes32 => address[]) internal _users;
-  
+
   modifier onlyManager(bytes32 _questId) {
-    require(msg.sender == _quests[_questId].manager, "Auth/Only Manager can call this function");
+    require(msg.sender == _quests[_questId].manager || msg.sender == _owner, "Auth/Only Manager can call this function");
     _;
   }
 
@@ -72,7 +73,7 @@ contract HiQuest is IHiQuest {
     emit HiquestManagerChanged(_questId, _manager);
     return true;
   }
-  
+
   function reward(bytes32 _questId, address _to, uint256 _amount) external onlyManager(_questId) returns(bool) {
     Quest storage quest = _quests[_questId];
     require(quest.open < now, "Reward/Quest not opened yet");

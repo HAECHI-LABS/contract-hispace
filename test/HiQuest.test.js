@@ -25,7 +25,7 @@ contract('HiQuest', (account) =>  {
       const due = (await time.latest()).add(new BN('100'));
       await expectRevert.unspecified(hiquest.create(web3.utils.randomHex(32), 0, due, new BN('100'), {from:deployer}));
     });
-    
+
     it('should fail if close time is past', async ()=>{
       const due = (await time.latest()).sub(new BN('100'));
       await token.approve(hiquest.address, new BN('100'), {from:deployer});
@@ -150,7 +150,7 @@ contract('HiQuest', (account) =>  {
     });
 
     it('should revert if msg.sender is not manager', async ()=>{
-      await expectRevert(hiquest.changeManager(questId, newManager, {from:deployer}), "Auth/Only Manager can call this function");
+      await expectRevert(hiquest.changeManager(questId, newManager, {from:others[0]}), "Auth/Only Manager can call this function");
     });
 
     it('should fail if _manager is zero address', async ()=>{
@@ -221,7 +221,7 @@ contract('HiQuest', (account) =>  {
     });
 
     it('should fail if msg.sender is not manager', async ()=>{
-      await expectRevert(hiquest.reward(questId, winner, new BN('100'), {from:deployer}), "Auth/Only Manager can call this function");
+      await expectRevert(hiquest.reward(questId, winner, new BN('100'), {from:others[0]}), "Auth/Only Manager can call this function");
     });
 
     it('should fail if quest is not opened yet', async ()=>{
@@ -232,11 +232,11 @@ contract('HiQuest', (account) =>  {
       await hiquest.create(questId, due.sub(new BN('1')), due, new BN('100'), {from:manager});
       await expectRevert(hiquest.reward(questId, winner, new BN('100'), {from:manager}), "Reward/Quest not opened yet");
     });
-    
+
     it('should fail if beneficiary has not joined', async ()=>{
       await expectRevert(hiquest.reward(questId, others[0], new BN('100'), {from:manager}), "Reward/Cannot reward not joined user");
     });
-    
+
     it('should fail if amount is larger than quest balance', async ()=>{
       await expectRevert(hiquest.reward(questId, winner, new BN('101'), {from:manager}), "Reward/Invalid amount of reward");
     });
@@ -251,7 +251,7 @@ contract('HiQuest', (account) =>  {
         const info = await hiquest.questInfo(questId);
         expect(info.balance).to.be.bignumber.equal(info.deposit.sub(new BN('80')));
       });
-      
+
       it('should increase recipient\'s token balance', async ()=>{
         const balance = await token.balanceOf(winner);
         expect(balance).to.be.bignumber.equal(new BN('80'));
@@ -280,7 +280,7 @@ contract('HiQuest', (account) =>  {
 
     it('should fail if msg.sender is not manager', async ()=>{
       await time.increaseTo(due.add(new BN('100')));
-      await expectRevert(hiquest.close(questId, {from:deployer}),"Auth/Only Manager can call this function");
+      await expectRevert(hiquest.close(questId, {from:others[0]}),"Auth/Only Manager can call this function");
     });
 
     it('should fail if quest is still on-going', async ()=>{
@@ -328,9 +328,9 @@ contract('HiQuest', (account) =>  {
     it('should fail if msg.sender is not manager', async ()=>{
       await time.increaseTo(due.add(new BN('100')));
       await hiquest.close(questId, {from:manager});
-      await expectRevert(hiquest.withdrawDeposit(questId, {from:deployer}), "Auth/Only Manager can call this function");
+      await expectRevert(hiquest.withdrawDeposit(questId, {from:others[0]}), "Auth/Only Manager can call this function");
     });
-    
+
     it('should fail if quest is not closed', async ()=>{
       await expectRevert(hiquest.withdrawDeposit(questId, {from:manager}), "Withdraw/Cannot withdraw from not closed quest");
     });
