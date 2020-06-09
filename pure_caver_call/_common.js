@@ -1,5 +1,4 @@
 const fs = require('fs');
-const moment = require('moment');
 
 const eoa = {
   taek: '0x5399850AB7BFE194FA1594F8051329CcC8aCfd56',
@@ -36,5 +35,5 @@ module.exports.contract = contract;
 module.exports.priv = priv;
 
 module.exports.logging = function(json, cmd) {
-  fs.appendFileSync('./history.log', moment().format("YYYY-MM-DDTHH:mm:ss") + ' - ' + cmd +'\n' + JSON.stringify(json, null, 2) + '\n')
+  fs.appendFileSync('./history.log', cmd +'\n' + JSON.stringify(json, null, 2) + '\n')
 }
