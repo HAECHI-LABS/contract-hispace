@@ -79,8 +79,9 @@ interface IHiQuest {
   /// @notice withdraws leftover HiBlocks token from `_questId` quest and sends to manager
   /// @dev onlyManager
   /// @param _questId quest id to withdraw from
+  /// @param _amount amount to withdraw
   /// @return success : return true if succeeded
-  function withdrawDeposit(bytes32  _questId) external returns (bool success);
+  function withdrawDeposit(bytes32  _questId, uint256 _amount) external returns (bool success);
 
   /// @notice view function to get data of quest
   /// @param _questId id of quest to query

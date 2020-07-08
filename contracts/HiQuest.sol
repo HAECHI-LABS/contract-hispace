@@ -94,12 +94,12 @@ contract HiQuest is IHiQuest, Ownable {
     return true;
   }
 
-  function withdrawDeposit(bytes32 _questId) external onlyManager(_questId) returns(bool) {
+  function withdrawDeposit(bytes32 _questId, uint256 amount) external onlyManager(_questId) returns(bool) {
     Quest storage quest = _quests[_questId];
     require(quest.closed, "Withdraw/Cannot withdraw from not closed quest");
-    uint256 amount = quest.balance;
-    quest.balance = 0;
-    _token.transfer(msg.sender, amount);
+    require(quest.balance >= amount, "Withdraw/Cannot withdraw more than balance");
+    quest.balance = quest.balance - amount;
+    _token.transfer(quest.manager, amount);
     emit WithDrawn(_questId, amount);
     return true;
   }

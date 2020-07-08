@@ -328,11 +328,17 @@ contract('HiQuest', (account) =>  {
     it('should fail if msg.sender is not manager', async ()=>{
       await time.increaseTo(due.add(new BN('100')));
       await hiquest.close(questId, {from:manager});
-      await expectRevert(hiquest.withdrawDeposit(questId, {from:others[0]}), "Auth/Only Manager can call this function");
+      await expectRevert(hiquest.withdrawDeposit(questId, 50,{from:others[0]}), "Auth/Only Manager can call this function");
     });
 
     it('should fail if quest is not closed', async ()=>{
-      await expectRevert(hiquest.withdrawDeposit(questId, {from:manager}), "Withdraw/Cannot withdraw from not closed quest");
+      await expectRevert(hiquest.withdrawDeposit(questId, 50,{from:manager}), "Withdraw/Cannot withdraw from not closed quest");
+    });
+
+    it.only('should fail if amount is larger than quest balance', async ()=>{
+      await time.increaseTo(due.add(new BN('100')));
+      await hiquest.close(questId, {from:manager});
+      await expectRevert(hiquest.withdrawDeposit(questId, 101,{from:manager}), "Withdraw/Cannot withdraw more than balance");
     });
 
     describe('when withdrawal succeeded', ()=>{
@@ -340,18 +346,18 @@ contract('HiQuest', (account) =>  {
       beforeEach(async ()=>{
         await time.increaseTo(due.add(new BN('100')));
         await hiquest.close(questId, {from:manager});
-        receipt = await hiquest.withdrawDeposit(questId, {from:manager});
+        receipt = await hiquest.withdrawDeposit(questId, 50,{from:manager});
       });
 
-      it('should set quest\'s balance to zero', async ()=>{
+      it('should reduce quest\'s balance', async ()=>{
         const info = await hiquest.questInfo(questId);
-        expect(info.balance).to.be.bignumber.equal(new BN(0));
+        expect(info.balance).to.be.bignumber.equal(new BN(50));
       });
 
       it('should emit WithDrawn event', async ()=>{
         expectEvent(receipt, 'WithDrawn', {
           questId: questId,
-          amount: balanceBefore
+          amount: new BN(50)
         });
       });
     });
