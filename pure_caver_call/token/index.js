@@ -16,7 +16,7 @@ const token = new caver.klay.Contract(Token, contract.token);
 const decimals = utils.toBN(18);
 
 // Amount of token
-const tokenAmount = utils.toBN(10000000000);
+const tokenAmount = utils.toBN(10000);
 
 // Amount as Hex - contract.methods.transfer(toAddress, tokenAmountHex).encodeABI();
 const tokenAmountHex = '0x' + tokenAmount.mul(utils.toBN(10).pow(decimals)).toString('hex');
@@ -49,7 +49,7 @@ async function transferFrom(to) {
 
 async function transfer(to) {
   const receipt = await token.methods.transfer(to, tokenAmountHex).send({
-    from: eoa.taek,
+    from: eoa.jh,
     gas: 8000000
   });
   console.log(receipt);
