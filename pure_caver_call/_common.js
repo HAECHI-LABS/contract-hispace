@@ -22,7 +22,7 @@ const contract = {
   savebox: '0x992C4c77573ca6A95a8834237bF08a74295ED3Ec',
   rewardpool: '0xeBd125d9E387909Fe31487Ca38f309618301c29B',
   rewardsupplier: '0xdA6f940A8CC3e95F7f39df0aF9cdCf4CF05F26D2',
-  quest: '0x9783d396F9970DB7f6e79BeB0D55d9FC85282e94',
+  quest: '0xbA43DFEd224937118320BD395d3bAE867647c247',
 };
 
 const savebox = {

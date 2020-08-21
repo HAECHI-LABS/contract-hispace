@@ -61,7 +61,7 @@ async function stakeTo(who, amount, boxId) {
   console.log('amount', amount);
   console.log('boxId', boxId);
   const receipt = await savebox.methods.stakeTo(
-    convertBoxId(boxId), 
+    convertBoxId(boxId),
     convertAmount(amount)
   )
     .send({
@@ -86,7 +86,7 @@ async function boxInfo(boxId) {
 
 async function sandbox() {
   // SP00000000000002
-  const bytes32 = '0x5350303030303030303030303030303200000000000000000000000000000000';
+  const bytes32 = '0x4851323032303038313930303030303100000000000000000000000000000000';
   const result = Web3.utils.toAscii(bytes32);
   console.log(result);
   const result3 = Web3.utils.fromAscii('SP00000000000002');

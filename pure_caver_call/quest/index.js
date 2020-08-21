@@ -33,10 +33,24 @@ function convertQuestId(id) {
 async function questInfo(id) {
   console.log('id', id);
   console.log('converted', convertQuestId(id));
-  const quest = await quest.methods.questInfo(convertQuestId(boxId)).call();
-  console.log(quest);
+  const result = await quest.methods.questInfo(convertQuestId(id)).call();
+  console.log(result);
 }
 
+async function create(questId) {
+  const receipt = await quest.methods.create(
+    convertQuestId(questId),
+    Date.now(),
+    Date.now() + 3600,
+    10000,
+  ).send({
+    from: eoa.taek,
+    gas: 8000000
+  });
+  console.log(receipt);
+}
+
+console.log(Date.now());
 if (process.argv.length < 3) {
   throw new Error('command must be given');
 }
@@ -50,6 +64,12 @@ switch (cmd) {
       throw new Error('questInfo questId must be specified');
     }
     return questInfo(process.argv[3]);
+
+  case 'create':
+    if (!process.argv[3]) {
+      throw new Error('create questId must be specified');
+    }
+    return create(process.argv[3]);
 
   default:
     throw new Error('invalid command: ' + cmd);
